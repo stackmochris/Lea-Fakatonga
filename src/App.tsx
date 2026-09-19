@@ -31,7 +31,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Tongan Professional Dictionaries</h1>
+        <h1>Tongan Specialist Terminology Dictionary</h1>
         <div className="controls">
           <select
             value={professionSlug}
