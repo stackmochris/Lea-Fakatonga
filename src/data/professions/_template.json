@@ -1,0 +1,20 @@
+{
+  "slug": "_template",
+  "name_en": "Template",
+  "name_to": "Sīpinga",
+  "entries": [
+    {
+      "id": "example-term",
+      "en_term": "Example Term",
+      "to_term": "Kupu Sīpinga",
+      "en_definition": "A one-to-two sentence plain-language definition.",
+      "to_definition": "Fakamatala 'i he lea Faka-Tonga.",
+      "category": "General",
+      "en_example": "Optional: how this term is actually used on the job.",
+      "to_example": "Optional: matching Tongan example.",
+      "prefix": "",
+      "audio_url": "",
+      "image_url": ""
+    }
+  ]
+}
