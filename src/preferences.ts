@@ -42,7 +42,7 @@ export function applyTheme(preference: ThemePreference) {
   document.documentElement.style.colorScheme = resolved;
   document.querySelector('meta[name="theme-color"]')?.setAttribute(
     "content",
-    resolved === "dark" ? "#100E0C" : "#C10020",
+    resolved === "dark" ? "#0b0b0c" : "#8f1d22",
   );
   write(THEME_KEY, preference);
   return resolved;

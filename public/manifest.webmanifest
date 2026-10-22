@@ -1,0 +1,24 @@
+{
+  "name": "Kolosālio",
+  "short_name": "Kolosālio",
+  "description": "Kolosālio is an English–Tongan glossary of specialist terms.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f4f5",
+  "theme_color": "#8f1d22",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
