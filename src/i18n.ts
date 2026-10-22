@@ -52,6 +52,8 @@ export type Chrome = {
   pronunciation: string;
   playPronunciation: string;
   letters: string;
+  desktopCredit: string;
+  keyHint: string;
 };
 
 const en: Chrome = {
@@ -96,6 +98,8 @@ const en: Chrome = {
   pronunciation: "Pronunciation",
   playPronunciation: "Play pronunciation",
   letters: "Letters",
+  desktopCredit: "Desktop web edition by Crisem Consulting.",
+  keyHint: "/ search · ↑↓ move · Enter open · Esc clear",
 };
 
 const to: Chrome = {
@@ -106,7 +110,7 @@ const to: Chrome = {
   searchWords: "Search words", // TODO verify
   clearSearch: "Clear search", // TODO verify
   cancel: "Cancel", // TODO verify
-  subjects: "Subjects", // TODO verify
+  subjects: "Ngaahi Kaveinga",
   home: "ʻApi",
   dictionary: "Dictionary", // TODO verify
   direction: "Direction", // TODO verify
@@ -140,6 +144,8 @@ const to: Chrome = {
   pronunciation: "Pronunciation", // TODO verify
   playPronunciation: "Play pronunciation", // TODO verify
   letters: "Letters", // TODO verify
+  desktopCredit: "Desktop web edition by Crisem Consulting.", // TODO verify
+  keyHint: "/ search · ↑↓ move · Enter open · Esc clear", // TODO verify
 };
 
 const chrome: Record<UiLang, Chrome> = { en, to };

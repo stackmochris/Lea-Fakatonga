@@ -38,8 +38,7 @@ export default function AlphaIndex({ letters, wide, label, onScrubbing }: Props)
     const update = () => {
       queued = false;
       if (dragging.current) return;
-      const toolbar = document.querySelector(".toolbar");
-      const line = (toolbar?.getBoundingClientRect().bottom ?? 0) + 1;
+      const line = anchorLine() + 1;
       let active = "";
       document.querySelectorAll<HTMLElement>(".letter-head").forEach((el) => {
         if (el.getBoundingClientRect().top <= line) active = el.dataset.letter || active;
@@ -61,17 +60,20 @@ export default function AlphaIndex({ letters, wide, label, onScrubbing }: Props)
     };
   }, [letters, wide]);
 
-  function revealHeader() {
-    document.querySelector(".app")?.classList.remove("is-header-hidden");
+  function anchorLine() {
+    if (wide) {
+      const scroller = document.querySelector<HTMLElement>(".list-scroll");
+      return scroller?.getBoundingClientRect().top ?? 0;
+    }
+    const bar = document.querySelector(".topbar");
+    return bar?.getBoundingClientRect().bottom ?? 0;
   }
 
   function jump(letter: ScrubLetter) {
     const el = document.getElementById(letter.targetId);
-    const toolbar = document.querySelector(".toolbar");
-    if (!el || !toolbar) return;
     const scroller = wide ? document.querySelector<HTMLElement>(".list-scroll") : document.scrollingElement;
-    if (!scroller) return;
-    const delta = el.getBoundingClientRect().top - toolbar.getBoundingClientRect().bottom;
+    if (!el || !scroller) return;
+    const delta = el.getBoundingClientRect().top - anchorLine();
     scroller.scrollTo({ top: scroller.scrollTop + delta, behavior: "auto" });
   }
 
@@ -116,7 +118,6 @@ export default function AlphaIndex({ letters, wide, label, onScrubbing }: Props)
     dragging.current = true;
     navRef.current?.setPointerCapture(event.pointerId);
     onScrubbing(true);
-    revealHeader();
     seek(event.clientY);
   }
 
@@ -155,7 +156,6 @@ export default function AlphaIndex({ letters, wide, label, onScrubbing }: Props)
             aria-label={letter.label}
             onClick={() => {
               if (!letter.enabled) return;
-              revealHeader();
               setCurrent(letter.label);
               jump(letter);
             }}
