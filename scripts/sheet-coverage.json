@@ -1,0 +1,96 @@
+{
+  "skippedTabs": [
+    {
+      "tab": "TNU",
+      "reason": "The sheet tab is empty."
+    },
+    {
+      "tab": "Body Parts Tongan order",
+      "reason": "The same 539 rows as Body Parts English order, sorted by Tongan. Imported once into body-parts.json."
+    }
+  ],
+  "skippedRows": [
+    {
+      "tab": "Komipiuta",
+      "row": 5,
+      "reason": "Section heading HARDWARE / UUNIMAKA. Hardware stays a category, not a term."
+    },
+    {
+      "tab": "Komipiuta",
+      "row": 31,
+      "reason": "Section heading SOFTWARE. Its Tongan term UUNIMOLU is stored on the existing Software entry."
+    },
+    {
+      "tab": "Komipiuta",
+      "row": 35,
+      "reason": "Second Software row, Tongan UNOMOLU. One Software entry is kept, using UUNIMOLU."
+    }
+  ],
+  "legacyEnglishAliases": [
+    {
+      "tab": "Ngoue",
+      "sheet": "Agroforestry landuse system that integrates plant/trees/pasture",
+      "app": "Agroforestry (landuse system that integrates plant/trees/pasture)"
+    },
+    {
+      "tab": "Ngoue",
+      "sheet": "Hydroponics: method of growing plants without soils, using a nutrient base solution",
+      "app": "Hydroponics"
+    },
+    {
+      "tab": "Ngoue",
+      "sheet": "Manure: natural fertilizer mainly of decomposed animal waste products",
+      "app": "Manure"
+    },
+    {
+      "tab": "Ngoue",
+      "sheet": "Subsistence Farming Subsistence farming",
+      "app": "Subsistence Farming"
+    },
+    {
+      "tab": "Ngoue",
+      "sheet": "Sustainable Agriculture Sustainable agriculture",
+      "app": "Sustainable Agriculture"
+    },
+    {
+      "tab": "Komipiuta",
+      "sheet": "BIOS (Basic Input/Output Sustems)",
+      "app": "BIOS (Basic Input/Output System)"
+    },
+    {
+      "tab": "Komipiuta",
+      "sheet": "Graphic Design Software:",
+      "app": "Graphic Design Software"
+    },
+    {
+      "tab": "Komipiuta",
+      "sheet": "Gaming Software:",
+      "app": "Gaming Software"
+    }
+  ],
+  "legacyPacks": {
+    "Ngoue": "agriculture.json",
+    "Komipiuta": "computer-terms.json",
+    "Taumu'a Fakalakalaka Tu'uloa": "sdg.json"
+  },
+  "newPacks": {
+    "ʻĀtolopolosia": "anthropology.json",
+    "TLS": "tls.json",
+    "Neesi": "nursing.json",
+    "Kēmisi": "chemistry.json",
+    "Fisiki": "physics.json",
+    "Teolosia": "theology.json",
+    "Body Parts English order": "body-parts.json",
+    "Medical ": "medical.json",
+    "Ngaue'anga (HR)": "human-resources.json",
+    "ʻEkonōmika": "economics.json"
+  },
+  "keepInAppNotInSheet": [
+    {
+      "file": "sdg.json",
+      "id": "education-equality",
+      "en_term": "Education equality",
+      "reason": "In the app and not on the sheet. Kept, as requested."
+    }
+  ]
+}

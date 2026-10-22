@@ -1,0 +1,1344 @@
+{
+ "tabs_missing_from_app": [
+  {
+   "tab": "ʻĀtolopolosia",
+   "sheet_count": 58
+  },
+  {
+   "tab": "TLS",
+   "sheet_count": 55
+  },
+  {
+   "tab": "Neesi",
+   "sheet_count": 50
+  },
+  {
+   "tab": "Kēmisi",
+   "sheet_count": 52
+  },
+  {
+   "tab": "Fisiki",
+   "sheet_count": 50
+  },
+  {
+   "tab": "Teolosia",
+   "sheet_count": 50
+  },
+  {
+   "tab": "Body Parts English order",
+   "sheet_count": 539
+  },
+  {
+   "tab": "Body Parts Tongan order",
+   "sheet_count": 539
+  },
+  {
+   "tab": "Medical ",
+   "sheet_count": 702
+  },
+  {
+   "tab": "Ngaue'anga (HR)",
+   "sheet_count": 118
+  },
+  {
+   "tab": "ʻEkonōmika",
+   "sheet_count": 93
+  },
+  {
+   "tab": "TNU",
+   "sheet_count": 0
+  }
+ ],
+ "tabs": {
+  "Ngoue": {
+   "app_file": "src/data/professions/agriculture.json",
+   "sheet_count": 52,
+   "app_count": 52,
+   "missing_from_app": [],
+   "in_app_not_sheet": [],
+   "english_term_differs_paired": [
+    {
+     "sheet_english": "Agroforestry landuse system that integrates plant/trees/pasture",
+     "app_english": "Agroforestry (landuse system that integrates plant/trees/pasture)"
+    },
+    {
+     "sheet_english": "Hydroponics: method of growing plants without soils, using a nutrient base solution",
+     "app_english": "Hydroponics"
+    },
+    {
+     "sheet_english": "Manure: natural fertilizer mainly of decomposed animal waste products",
+     "app_english": "Manure"
+    },
+    {
+     "sheet_english": "Subsistence Farming Subsistence farming",
+     "app_english": "Subsistence Farming"
+    },
+    {
+     "sheet_english": "Sustainable Agriculture Sustainable agriculture",
+     "app_english": "Sustainable Agriculture"
+    }
+   ],
+   "duplicates_sheet": [],
+   "duplicates_app": [],
+   "exact": 26,
+   "case_only": [],
+   "whitespace_or_nfc_only": [],
+   "okina_glottal_variant": [
+    {
+     "english": "Tiller",
+     "sheet": "Me’angaue fulihi kelekele",
+     "app": "Me'angaue fulihi kelekele",
+     "sheet_row": 49,
+     "app_id": "tiller"
+    },
+    {
+     "english": "Aquaponics",
+     "sheet": "Ngoue ‘aki e vai",
+     "app": "Ngoue 'aki e vai",
+     "sheet_row": 7,
+     "app_id": "aquaponics"
+    },
+    {
+     "english": "Agriculturalist",
+     "sheet": "Tokotaha ‘ilo-lahi kihe ngoue",
+     "app": "Tokotaha 'ilo-lahi kihe ngoue",
+     "sheet_row": 3,
+     "app_id": "agriculturalist"
+    },
+    {
+     "english": "Grower",
+     "sheet": "Me’angaue fakatupu-ngoue",
+     "app": "Me'angaue fakatupu-ngoue",
+     "sheet_row": 27,
+     "app_id": "grower"
+    },
+    {
+     "english": "Organic Farming",
+     "sheet": "Ngoue faka-natula (Íkai kau ha Fafanga Ngaohi pe Faito’o)",
+     "app": "Ngoue faka-natula ('Ikai kau ha Fafanga Ngaohi pe Faito'o)",
+     "sheet_row": 38,
+     "app_id": "organic-farming"
+    },
+    {
+     "english": "Cultivator",
+     "sheet": "Me’angaue to-ngoue",
+     "app": "Me'angaue to-ngoue",
+     "sheet_row": 18,
+     "app_id": "cultivator"
+    },
+    {
+     "english": "Farm Field",
+     "sheet": "Ngoue’anga",
+     "app": "Ngoue'anga",
+     "sheet_row": 21,
+     "app_id": "farm-field"
+    },
+    {
+     "english": "Four Types of Farming",
+     "sheet": "Fa’ahinga ‘e 4 ‘oe Faama",
+     "app": "Fa'ahinga 'e 4 'oe Faama",
+     "sheet_row": 25,
+     "app_id": "four-types-of-farming"
+    },
+    {
+     "english": "Rural Development",
+     "sheet": "Fakalakalaka e Tuku’uta",
+     "app": "Fakalakalaka e Tuku'uta",
+     "sheet_row": 44,
+     "app_id": "rural-development"
+    },
+    {
+     "english": "Harvesting",
+     "sheet": "Utu-ta’u (ma’ala), Amusi(hiapo), ta’aki (ngoue-foha), toli (akaufua), tā (vesitapolo)",
+     "app": "Utu-ta'u (ma'ala), Amusi (hiapo), ta'aki (ngoue-foha), toli (akaufua), tā (vesitapolo)",
+     "sheet_row": 29,
+     "app_id": "harvesting"
+    },
+    {
+     "english": "Harvester",
+     "sheet": "Me’angaue toli/ta’aki-ngoue",
+     "app": "Me'angaue toli/ta'aki-ngoue",
+     "sheet_row": 28,
+     "app_id": "harvester"
+    },
+    {
+     "english": "Sowing",
+     "sheet": "Fakaheka’i, tō’i",
+     "app": "Fakaheka'i, tō'i",
+     "sheet_row": 46,
+     "app_id": "sowing"
+    },
+    {
+     "english": "Regenerative Farming",
+     "sheet": "Ngoue fakaivia Me’amo’ui/Ivi e kelekele",
+     "app": "Ngoue fakaivia Me'amo'ui/Ivi e kelekele",
+     "sheet_row": 43,
+     "app_id": "regenerative-farming"
+    },
+    {
+     "english": "Manuring",
+     "sheet": "Fafanga fakanatula (meihe ‘amoa, ‘apuaka, pulu, etc.)",
+     "app": "Fafanga fakanatula (meihe 'amoa, 'apuaka, pulu, etc.)",
+     "sheet_row": 37,
+     "app_id": "manuring"
+    },
+    {
+     "english": "Planter",
+     "sheet": "Me’angaue to-ngoue",
+     "app": "Me'angaue to-ngoue",
+     "sheet_row": 39,
+     "app_id": "planter"
+    },
+    {
+     "english": "Components of Agriculture Industry",
+     "sheet": "Konga/Kupu e Kautaha-fa’u Ngoue",
+     "app": "Konga/Kupu e Kautaha-fa'u Ngoue",
+     "sheet_row": 12,
+     "app_id": "components-of-agriculture-industry"
+    },
+    {
+     "english": "Four Modern Types of Farming",
+     "sheet": "Fa’ahinga ‘e 4 ‘oe Faama fakaono-pooni",
+     "app": "Fa'ahinga 'e 4 'oe Faama fakaono-pooni",
+     "sheet_row": 24,
+     "app_id": "four-modern-types-of-farming"
+    },
+    {
+     "english": "Biodynamic Farming",
+     "sheet": "Ivi Me’amo’ui",
+     "app": "Ivi Me'amo'ui",
+     "sheet_row": 9,
+     "app_id": "biodynamic-farming"
+    },
+    {
+     "english": "Vertical Farming",
+     "sheet": "Ngoue tautau ki ‘olunga",
+     "app": "Ngoue tautau ki 'olunga",
+     "sheet_row": 51,
+     "app_id": "vertical-farming"
+    },
+    {
+     "english": "Irrigation",
+     "sheet": "Fakavai, fu’ifu’i",
+     "app": "Fakavai, fu'ifu'i",
+     "sheet_row": 34,
+     "app_id": "irrigation"
+    },
+    {
+     "english": "Tilling",
+     "sheet": "Palau-fulihi’i,",
+     "app": "Palau-fulihi'i",
+     "sheet_row": 50,
+     "app_id": "tilling"
+    },
+    {
+     "english": "Horticulture",
+     "sheet": "Ngoue ‘Akau-fua",
+     "app": "Ngoue 'Akau-fua",
+     "sheet_row": 30,
+     "app_id": "horticulture"
+    },
+    {
+     "english": "Ploughing",
+     "sheet": "Palau’i",
+     "app": "Palau'i",
+     "sheet_row": 40,
+     "app_id": "ploughing"
+    },
+    {
+     "english": "De-weeding",
+     "sheet": "To’o-e-vao",
+     "app": "To'o-e-vao",
+     "sheet_row": 19,
+     "app_id": "de-weeding"
+    },
+    {
+     "english": "Farmland",
+     "sheet": "Feitu’u Ngoue",
+     "app": "Feitu'u Ngoue",
+     "sheet_row": 22,
+     "app_id": "farmland"
+    }
+   ],
+   "macron_diacritic_diff": [],
+   "mismatch": [
+    {
+     "english": "Manure: natural fertilizer mainly of decomposed animal waste products",
+     "sheet": "Fafanga- fakanatula kihe Ngoue",
+     "app": "Fafanga-fakanatula kihe Ngoue",
+     "sheet_row": 36,
+     "app_id": "manure"
+    }
+   ],
+   "definition_diffs": [
+    {
+     "english": "Waste Management",
+     "field": "to_definition",
+     "sheet": "Ko hono ngaohi mo vilovilohi e veve mei he ngoue hange koe (te'e-monumanu moe toenga ngoue) 'o fakaáonga'I koe fafanga ngoue mo fakasi'sisi'I ai e vevea hotau 'atakai",
+     "app": "Ko hono ngaohi mo vilovilohi e veve mei he ngoue hange koe te'e-monumanu moe toenga ngoue, 'o fakaáonga'i koe fafanga ngoue mo fakasi'sisi'i ai e vevea hotau 'atakai"
+    },
+    {
+     "english": "Four Types of Farming",
+     "field": "en_definition",
+     "sheet": "Conventional, Organic, Regenerative, Biodynamic Farming",
+     "app": "Conventional, Organic, Regenerative, Biodynamic Farming."
+    },
+    {
+     "english": "Postharvest handling",
+     "field": "en_definition",
+     "sheet": "Processing, storing, and transporting crops after harvest. The stage of crop production immediately following harvest, including cooling, cleaning, sorting and packing.",
+     "app": "Processing, storing, and transporting crops after harvest, including cooling, cleaning, sorting and packing."
+    },
+    {
+     "english": "Subsistence Farming Subsistence farming",
+     "field": "en_definition",
+     "sheet": "Farming mainly to feed the farmer’s household.  A form of agriculture where almost all crops or livestock raised are used to maintain the farmer and their family, leaving little to no surplus for sale or trade.",
+     "app": "Farming mainly to feed the farmer's household, leaving little to no surplus for sale or trade."
+    },
+    {
+     "english": "Intercropping",
+     "field": "to_definition",
+     "sheet": "Ko hono tō fakataha ha ngoue kehekehe é 2 pe lahi ange he feitu'tu tatau pe",
+     "app": "Ko hono tō fakataha ha ngoue kehekehe é 2 pe lahi ange he feitu'u tatau pe"
+    },
+    {
+     "english": "Manuring",
+     "field": "to_definition",
+     "sheet": "Ko hono tanaki e te'e-monumanu pe ko ha me'akehe fakanatuala ke fakalelei kelekele",
+     "app": "Ko hono tanaki e te'e-monumanu pe ko ha me'akehe fakanatula ke fakalelei kelekele"
+    },
+    {
+     "english": "Integrated Pest Management (IPM)",
+     "field": "en_definition",
+     "sheet": "Combines the use of biological (natural predators/parasites), chemical (selective) and cultural practices (seasonal cropping, crop-rotation, etc.) to control insect pests in agriculture.",
+     "app": "Combines biological, chemical, and cultural practices (seasonal cropping, crop-rotation, etc.) to control insect pests in agriculture."
+    },
+    {
+     "english": "Sustainable Agriculture Sustainable agriculture",
+     "field": "en_definition",
+     "sheet": "Farming that meets current needs without harming future resources. Farming that aims to provide resources necessary for present human populations while conserving the planet’s ability to sustain future",
+     "app": "Farming that meets current needs without harming the ability of future resources to sustain the planet."
+    },
+    {
+     "english": "Four Modern Types of Farming",
+     "field": "en_definition",
+     "sheet": "Precision, Hydroponics, Aquaponics, Vertical Farming",
+     "app": "Precision, Hydroponics, Aquaponics, Vertical Farming."
+    }
+   ]
+  },
+  "Komipiuta": {
+   "app_file": "src/data/professions/computer-terms.json",
+   "sheet_count": 53,
+   "app_count": 51,
+   "missing_from_app": [
+    "HARDWARE"
+   ],
+   "in_app_not_sheet": [],
+   "english_term_differs_paired": [
+    {
+     "sheet_english": "USB ( Universal Serial Bus)",
+     "app_english": "USB (Universal Serial Bus)"
+    },
+    {
+     "sheet_english": "BIOS (Basic Input/Output Sustems)",
+     "app_english": "BIOS (Basic Input/Output System)"
+    }
+   ],
+   "duplicates_sheet": [
+    "Software"
+   ],
+   "duplicates_app": [],
+   "exact": 11,
+   "case_only": [
+    {
+     "english": "Data",
+     "sheet": "OKOOKO",
+     "app": "Okooko",
+     "sheet_row": 56,
+     "app_id": "data"
+    },
+    {
+     "english": "BIOS (Basic Input/Output Sustems)",
+     "sheet": "LAUHOKO",
+     "app": "Lauhoko",
+     "sheet_row": 29,
+     "app_id": "bios-basic-input-output-system"
+    },
+    {
+     "english": "Application Software",
+     "sheet": "NGAFAMOLU",
+     "app": "Ngafamolu",
+     "sheet_row": 33,
+     "app_id": "application-software"
+    },
+    {
+     "english": "Firewall",
+     "sheet": "HOLISIAFI",
+     "app": "Holisiafi",
+     "sheet_row": 45,
+     "app_id": "firewall"
+    },
+    {
+     "english": "Folder",
+     "sheet": "TAKAFI",
+     "app": "Takafi",
+     "sheet_row": 37,
+     "app_id": "folder"
+    },
+    {
+     "english": "Optical Drive",
+     "sheet": "LAUVAKAI",
+     "app": "Lauvakai",
+     "sheet_row": 25,
+     "app_id": "optical-drive"
+    },
+    {
+     "english": "Cooling Fan",
+     "sheet": "Ī FAKAMOKOMOKO",
+     "app": "Ī Fakamokomoko",
+     "sheet_row": 24,
+     "app_id": "cooling-fan"
+    },
+    {
+     "english": "Ports",
+     "sheet": "HOKO",
+     "app": "Hoko",
+     "sheet_row": 30,
+     "app_id": "ports"
+    },
+    {
+     "english": "Modem",
+     "sheet": "LUAKAFA",
+     "app": "Luakafa",
+     "sheet_row": 17,
+     "app_id": "modem"
+    },
+    {
+     "english": "Speakers",
+     "sheet": "LELEA",
+     "app": "Lelea",
+     "sheet_row": 28,
+     "app_id": "speakers"
+    },
+    {
+     "english": "Keyboard",
+     "sheet": "PAPAPULE",
+     "app": "Papapule",
+     "sheet_row": 13,
+     "app_id": "keyboard"
+    },
+    {
+     "english": "Search",
+     "sheet": "KUMI & HA'AO",
+     "app": "Kumi & Ha'ao",
+     "sheet_row": 57,
+     "app_id": "search"
+    },
+    {
+     "english": "Power Supply",
+     "sheet": "FONO'UHILA",
+     "app": "Fono'uhila",
+     "sheet_row": 23,
+     "app_id": "power-supply"
+    },
+    {
+     "english": "Router",
+     "sheet": "LUAHOKO",
+     "app": "Luahoko",
+     "sheet_row": 18,
+     "app_id": "router"
+    },
+    {
+     "english": "USB ( Universal Serial Bus)",
+     "sheet": "NGALUKAFA",
+     "app": "Ngalukafa",
+     "sheet_row": 19,
+     "app_id": "usb-universal-serial-bus"
+    },
+    {
+     "english": "Browser",
+     "sheet": "FUEOPE",
+     "app": "Fueope",
+     "sheet_row": 34,
+     "app_id": "browser"
+    },
+    {
+     "english": "Microphone",
+     "sheet": "LUAUI",
+     "app": "Luaui",
+     "sheet_row": 27,
+     "app_id": "microphone"
+    },
+    {
+     "english": "CPU (Central Processing Unit)",
+     "sheet": "HOKOAONIU (HA)",
+     "app": "Hokoaoniu (HA)",
+     "sheet_row": 7,
+     "app_id": "cpu-central-processing-unit"
+    },
+    {
+     "english": "Motherboard",
+     "sheet": "PAPAFA'E",
+     "app": "Papafa'e",
+     "sheet_row": 10,
+     "app_id": "motherboard"
+    },
+    {
+     "english": "Driver",
+     "sheet": "TEKE",
+     "app": "Teke",
+     "sheet_row": 46,
+     "app_id": "driver"
+    },
+    {
+     "english": "Sound Card",
+     "sheet": "TUKU'ANGA ONGO",
+     "app": "Tuku'anga Ongo",
+     "sheet_row": 21,
+     "app_id": "sound-card"
+    },
+    {
+     "english": "Scanner",
+     "sheet": "PAPAPAAKI",
+     "app": "Papapaaki",
+     "sheet_row": 16,
+     "app_id": "scanner"
+    },
+    {
+     "english": "Operating System (OS)",
+     "sheet": "UHONGAUE",
+     "app": "Uhongaue",
+     "sheet_row": 32,
+     "app_id": "operating-system-os"
+    },
+    {
+     "english": "Webcam",
+     "sheet": "NGALUATA",
+     "app": "Ngaluata",
+     "sheet_row": 26,
+     "app_id": "webcam"
+    },
+    {
+     "english": "RAM (Random Access Memory)",
+     "sheet": "TAUHI'ANGA MANATU LOLOTONGA (TML)",
+     "app": "Tauhi'anga Manatu Lolotonga (TML)",
+     "sheet_row": 8,
+     "app_id": "ram-random-access-memory"
+    },
+    {
+     "english": "File",
+     "sheet": "NAUNAU",
+     "app": "Naunau",
+     "sheet_row": 36,
+     "app_id": "file"
+    },
+    {
+     "english": "Monitor",
+     "sheet": "VAKAI'ANGA",
+     "app": "Vakai'anga",
+     "sheet_row": 12,
+     "app_id": "monitor"
+    },
+    {
+     "english": "Virus",
+     "sheet": "KAHIKAIHA'A",
+     "app": "Kahikaiha'a",
+     "sheet_row": 43,
+     "app_id": "virus"
+    },
+    {
+     "english": "Cloud Computing",
+     "sheet": "OPEOMA",
+     "app": "Opeoma",
+     "sheet_row": 53,
+     "app_id": "cloud-computing"
+    },
+    {
+     "english": "Computer",
+     "sheet": "AHUOMA",
+     "app": "Ahuoma",
+     "sheet_row": 6,
+     "app_id": "computer"
+    },
+    {
+     "english": "Code",
+     "sheet": "OTULEA",
+     "app": "Otulea",
+     "sheet_row": 39,
+     "app_id": "code"
+    },
+    {
+     "english": "Printer",
+     "sheet": "PAPAPULISI",
+     "app": "Papapulisi",
+     "sheet_row": 15,
+     "app_id": "printer"
+    },
+    {
+     "english": "Hard Drive",
+     "sheet": "TEKE FEFEKA",
+     "app": "Teke Fefeka",
+     "sheet_row": 9,
+     "app_id": "hard-drive"
+    },
+    {
+     "english": "Mouse",
+     "sheet": "PULE",
+     "app": "Pule",
+     "sheet_row": 14,
+     "app_id": "mouse"
+    },
+    {
+     "english": "Case",
+     "sheet": "KOFU",
+     "app": "Kofu",
+     "sheet_row": 22,
+     "app_id": "case"
+    },
+    {
+     "english": "Program",
+     "sheet": "OKOOKO",
+     "app": "Okooko",
+     "sheet_row": 38,
+     "app_id": "program"
+    },
+    {
+     "english": "Database",
+     "sheet": "FELEOKO",
+     "app": "Feleoko",
+     "sheet_row": 47,
+     "app_id": "database"
+    },
+    {
+     "english": "Graphics Card",
+     "sheet": "TUKU'ANGA 'ATA",
+     "app": "Tuku'anga 'Ata",
+     "sheet_row": 11,
+     "app_id": "graphics-card"
+    },
+    {
+     "english": "Ethernet Port",
+     "sheet": "OPEHOKO",
+     "app": "Opehoko",
+     "sheet_row": 20,
+     "app_id": "ethernet-port"
+    }
+   ],
+   "whitespace_or_nfc_only": [],
+   "okina_glottal_variant": [],
+   "macron_diacritic_diff": [],
+   "mismatch": [
+    {
+     "english": "SOFTWARE",
+     "sheet": "UUNIMOLU",
+     "app": "Unomolu",
+     "sheet_row": 31,
+     "app_id": "software"
+    }
+   ],
+   "definition_diffs": [
+    {
+     "english": "BIOS (Basic Input/Output Sustems)",
+     "field": "en_definition",
+     "sheet": "Firmware that initializes the computer at startup. It is a form of firmware that tells your computer's operating system how to operate properly. It contains instructions on how to control various hardware components such as hard disks, keyboards, and display screens.",
+     "app": "Firmware that initializes the computer at startup and controls hardware components such as hard disks, keyboards, and display screens."
+    },
+    {
+     "english": "Optical Drive",
+     "field": "en_definition",
+     "sheet": "Reads CDs and DVDs. A piece of hardware that reads and writes data on optical discs like CDs, DVDs, and Blu-ray discs using a laser",
+     "app": "Reads and writes data on optical discs like CDs, DVDs, and Blu-ray discs using a laser."
+    },
+    {
+     "english": "Speakers",
+     "field": "en_definition",
+     "sheet": "Output audio",
+     "app": "Output audio."
+    },
+    {
+     "english": "Monitor",
+     "field": "en_definition",
+     "sheet": "The screen that displays information. A monitor is the screen you use to see everything on your computer. It's like a television (TV), but specifically designed to display information from your computer. Without a monitor, you wouldn't be able to see the websites you visit, the documents you create, or the games you play.",
+     "app": "The screen that displays information from your computer."
+    },
+    {
+     "english": "Computer",
+     "field": "en_definition",
+     "sheet": "An electronic device for storing and processing data, typically in binary form, according to instructions given to it in a variable program",
+     "app": "An electronic device for storing and processing data, typically in binary form, according to instructions given to it in a variable program."
+    },
+    {
+     "english": "Hard Drive",
+     "field": "en_definition",
+     "sheet": "Permanent storage for data and programs. A hard drive, also known as a hard disk drive (HDD), is a data storage device that uses magnetic platters to store and retrieve digital information. It's a crucial component in computers and other devices, providing persistent storage for the operating system, applications, and user files.",
+     "app": "Permanent storage for data and programs - a data storage device that uses magnetic platters to store and retrieve digital information."
+    },
+    {
+     "english": "Graphics Card",
+     "field": "en_definition",
+     "sheet": "A graphics card, also known as a video card or graphics processing unit (GPU), is a hardware component responsible for rendering and displaying images, videos, and animations on your computer monitor.",
+     "app": "A hardware component responsible for rendering and displaying images, videos, and animations on your computer monitor."
+    }
+   ]
+  },
+  "Taumu'a Fakalakalaka Tu'uloa": {
+   "app_file": "src/data/professions/sdg.json",
+   "sheet_count": 47,
+   "app_count": 48,
+   "missing_from_app": [],
+   "in_app_not_sheet": [
+    "Education equality"
+   ],
+   "english_term_differs_paired": [],
+   "duplicates_sheet": [],
+   "duplicates_app": [],
+   "exact": 11,
+   "case_only": [],
+   "whitespace_or_nfc_only": [],
+   "okina_glottal_variant": [
+    {
+     "english": "Lifelong learning",
+     "sheet": "Ako hokohoko pē lolotonga ‘o e mo’ui",
+     "app": "Ako hokohoko pē lolotonga 'o e mo'ui",
+     "sheet_row": 45,
+     "app_id": "lifelong-learning"
+    },
+    {
+     "english": "Economic justice",
+     "sheet": "Tūkunga faka’ekononika taau",
+     "app": "Tūkunga faka'ekononika taau",
+     "sheet_row": 14,
+     "app_id": "economic-justice"
+    },
+    {
+     "english": "Healthcare equity",
+     "sheet": "Tokangaekina taau ‘a e mo’ui Lelei",
+     "app": "Tokangaekina taau 'a e mo'ui Lelei",
+     "sheet_row": 40,
+     "app_id": "healthcare-equity"
+    },
+    {
+     "english": "Quality education",
+     "sheet": "Ako tu’unga lelei",
+     "app": "Ako tu'unga lelei",
+     "sheet_row": 47,
+     "app_id": "quality-education"
+    },
+    {
+     "english": "Food Systems",
+     "sheet": "Sisitemi me’atokoni",
+     "app": "Sisitemi me'atokoni",
+     "sheet_row": 27,
+     "app_id": "food-systems"
+    },
+    {
+     "english": "Universal healthcare",
+     "sheet": "Tokangaekina fakakātoa ‘o e mo’ui lelei",
+     "app": "Tokangaekina fakakātoa 'o e mo'ui lelei",
+     "sheet_row": 39,
+     "app_id": "universal-healthcare"
+    },
+    {
+     "english": "Crop Yield",
+     "sheet": "Ola ‘o e ngouē ki he lahi ‘o e kelekele",
+     "app": "Ola 'o e ngouē ki he lahi 'o e kelekele",
+     "sheet_row": 26,
+     "app_id": "crop-yield"
+    },
+    {
+     "english": "Literacy",
+     "sheet": "Lava ‘o laukonga mo tohi",
+     "app": "Lava 'o laukonga mo tohi",
+     "sheet_row": 52,
+     "app_id": "literacy"
+    },
+    {
+     "english": "Life expectancy",
+     "sheet": "Lōloa ‘o e mo’ui",
+     "app": "Lōloa 'o e mo'ui",
+     "sheet_row": 32,
+     "app_id": "life-expectancy"
+    },
+    {
+     "english": "Maternal health",
+     "sheet": "Mo’ui Lelei ‘a e Fa’ē",
+     "app": "Mo'ui Lelei 'a e Fa'ē",
+     "sheet_row": 37,
+     "app_id": "maternal-health"
+    },
+    {
+     "english": "Sanitation",
+     "sheet": "Faka’ehi’ehi ke ma'a",
+     "app": "Faka'ehi'ehi ke ma'a",
+     "sheet_row": 29,
+     "app_id": "sanitation"
+    },
+    {
+     "english": "Social protection",
+     "sheet": "Malu’i e kakai",
+     "app": "Malu'i e kakai",
+     "sheet_row": 10,
+     "app_id": "social-protection"
+    },
+    {
+     "english": "Pandemic preparedness",
+     "sheet": "Mateuteu ki ha to’umahaki",
+     "app": "Mateuteu ki ha to'umahaki",
+     "sheet_row": 35,
+     "app_id": "pandemic-preparedness"
+    },
+    {
+     "english": "Nutrition",
+     "sheet": "Me’atokoni ivi'ia fe'unga",
+     "app": "Me'atokoni ivi'ia fe'unga",
+     "sheet_row": 22,
+     "app_id": "nutrition"
+    },
+    {
+     "english": "Agroecology",
+     "sheet": "Ngāue’i ‘a tōkanga ke fenāpasi mo natula",
+     "app": "Ngāue'i 'a tōkanga ke fenāpasi mo natula",
+     "sheet_row": 24,
+     "app_id": "agroecology"
+    },
+    {
+     "english": "Microfinance",
+     "sheet": "Nō’anga pa’anga iiki",
+     "app": "Nō'anga pa'anga iiki",
+     "sheet_row": 12,
+     "app_id": "microfinance"
+    },
+    {
+     "english": "Non-Communicable diseases",
+     "sheet": "Mahaki mei he to’onga mo’ui",
+     "app": "Mahaki mei he to'onga mo'ui",
+     "sheet_row": 33,
+     "app_id": "non-communicable-diseases"
+    },
+    {
+     "english": "Disease prevention",
+     "sheet": "Malu’i mei ha mahaki",
+     "app": "Malu'i mei ha mahaki",
+     "sheet_row": 34,
+     "app_id": "disease-prevention"
+    },
+    {
+     "english": "Health",
+     "sheet": "Mo’ui lelei kakato",
+     "app": "Mo'ui lelei kakato",
+     "sheet_row": 38,
+     "app_id": "health"
+    },
+    {
+     "english": "Soil health",
+     "sheet": "Mo’ui lelei ‘a e kelekele",
+     "app": "Mo'ui lelei 'a e kelekele",
+     "sheet_row": 23,
+     "app_id": "soil-health"
+    },
+    {
+     "english": "Early childhood education",
+     "sheet": "Ako ‘a e longa’i fānau",
+     "app": "Ako 'a e longa'i fānau",
+     "sheet_row": 43,
+     "app_id": "early-childhood-education"
+    },
+    {
+     "english": "Food Waste",
+     "sheet": "Maumau’i ‘o e me’atokoni",
+     "app": "Maumau'i 'o e me'atokoni",
+     "sheet_row": 20,
+     "app_id": "food-waste"
+    },
+    {
+     "english": "Biodiversity",
+     "sheet": "Me’a mo’ui kehekehe",
+     "app": "Me'a mo'ui kehekehe",
+     "sheet_row": 21,
+     "app_id": "biodiversity"
+    },
+    {
+     "english": "Vaccination",
+     "sheet": "Huhufaito’o",
+     "app": "Huhufaito'o",
+     "sheet_row": 31,
+     "app_id": "vaccination"
+    },
+    {
+     "english": "Learning outcomes",
+     "sheet": "Ola ‘o e Ako",
+     "app": "Ola 'o e Ako",
+     "sheet_row": 54,
+     "app_id": "learning-outcomes"
+    },
+    {
+     "english": "Economic resilience",
+     "sheet": "Mālohi faka’ekonomika",
+     "app": "Mālohi faka'ekonomika",
+     "sheet_row": 9,
+     "app_id": "economic-resilience"
+    },
+    {
+     "english": "Child mortality",
+     "sheet": "Fua ‘o e mate ‘o e fānau",
+     "app": "Fua 'o e mate 'o e fānau",
+     "sheet_row": 30,
+     "app_id": "child-mortality"
+    },
+    {
+     "english": "Mental health",
+     "sheet": "Mo’ui Lelei ‘a e ‘atamai",
+     "app": "Mo'ui Lelei 'a e 'atamai",
+     "sheet_row": 36,
+     "app_id": "mental-health"
+    },
+    {
+     "english": "Universal basic Income",
+     "sheet": "Pa’anga hū mai ma ‘a e taha kotoa",
+     "app": "Pa'anga hū mai ma 'a e taha kotoa",
+     "sheet_row": 13,
+     "app_id": "universal-basic-income"
+    },
+    {
+     "english": "Digital literacy",
+     "sheet": "Lava ‘o ngaue’aki ‘a e tekinolosia fetu’utaki",
+     "app": "Lava 'o ngaue'aki 'a e tekinolosia fetu'utaki",
+     "sheet_row": 53,
+     "app_id": "digital-literacy"
+    }
+   ],
+   "macron_diacritic_diff": [],
+   "mismatch": [
+    {
+     "english": "Food security",
+     "sheet": "Malu 'a e ma'u'anga me'atokoní",
+     "app": "Malu 'o e ma'u'anga me'atokoni",
+     "sheet_row": 19,
+     "app_id": "food-security"
+    },
+    {
+     "english": "Resource access",
+     "sheet": "Ma'u 'o e koloa",
+     "app": "Ma'ungofua 'o e koloa faka'aho",
+     "sheet_row": 7,
+     "app_id": "resource-access"
+    },
+    {
+     "english": "Eradication",
+     "sheet": "Fakangata faka’aufuli",
+     "app": "Fakangata faka'aufuli e masiva mo e fiekaia",
+     "sheet_row": 5,
+     "app_id": "eradication"
+    },
+    {
+     "english": "Income gap",
+     "sheet": "Faikehekehe he vāhengá",
+     "app": "Faikehekehe he vāhenga",
+     "sheet_row": 4,
+     "app_id": "income-gap"
+    },
+    {
+     "english": "Malnutrition",
+     "sheet": "Fasimanava",
+     "app": "Si'i e ivi fakame'a tokoni 'oku ma'u",
+     "sheet_row": 18,
+     "app_id": "malnutrition"
+    },
+    {
+     "english": "Financial inclusion",
+     "sheet": "Kau mai he [ta'au 'o e] nō pa'anga",
+     "app": "Malava ke nō pa'anga",
+     "sheet_row": 8,
+     "app_id": "financial-inclusion"
+    }
+   ],
+   "definition_diffs": [
+    {
+     "english": "Hunger",
+     "field": "en_definition",
+     "sheet": "Lack of adequate food intake",
+     "app": "Lack of adequate food intake."
+    },
+    {
+     "english": "Hunger",
+     "field": "to_definition",
+     "sheet": "Ikai ma'u fe'unga e me'atokoni ke mo'ui lelei e sinó",
+     "app": ""
+    },
+    {
+     "english": "Food security",
+     "field": "en_definition",
+     "sheet": "Reliable access to sufficient, nutritious food",
+     "app": "Reliable access to sufficient, nutritious food."
+    },
+    {
+     "english": "Food security",
+     "field": "to_definition",
+     "sheet": "Malu ‘o e ma’u’anga me’atokoní",
+     "app": ""
+    },
+    {
+     "english": "Lifelong learning",
+     "field": "en_definition",
+     "sheet": "Continuous education throughout life",
+     "app": "Continuous education throughout life."
+    },
+    {
+     "english": "Economic justice",
+     "field": "en_definition",
+     "sheet": "Fair allocation of economic benefits",
+     "app": "Fair allocation of economic benefits."
+    },
+    {
+     "english": "Economic justice",
+     "field": "to_definition",
+     "sheet": "Vahavahe taau 'o e ngaahi lelei faka'ekonomiká",
+     "app": ""
+    },
+    {
+     "english": "Healthcare equity",
+     "field": "en_definition",
+     "sheet": "Fair access to medical care",
+     "app": "Fair access to medical care."
+    },
+    {
+     "english": "Quality education",
+     "field": "en_definition",
+     "sheet": "Effective, inclusive learning",
+     "app": "Effective, inclusive learning."
+    },
+    {
+     "english": "Inequality",
+     "field": "en_definition",
+     "sheet": "Unequal distribution [of resources or opportunities]",
+     "app": "Unequal distribution of resources or opportunities."
+    },
+    {
+     "english": "Inequality",
+     "field": "to_definition",
+     "sheet": "Ikai ke vahevahe taau ['a e koloá mo e faingamalié",
+     "app": ""
+    },
+    {
+     "english": "Food Systems",
+     "field": "en_definition",
+     "sheet": "Processes from production to consumption",
+     "app": "Processes from production to consumption."
+    },
+    {
+     "english": "Universal healthcare",
+     "field": "en_definition",
+     "sheet": "Access to health services for all",
+     "app": "Access to health services for all."
+    },
+    {
+     "english": "Crop Yield",
+     "field": "en_definition",
+     "sheet": "Agricultural output per unit of land",
+     "app": "Agricultural output per unit of land."
+    },
+    {
+     "english": "Literacy",
+     "field": "en_definition",
+     "sheet": "Ability to read and write",
+     "app": "Ability to read and write."
+    },
+    {
+     "english": "Access to education",
+     "field": "en_definition",
+     "sheet": "Availability of schooling",
+     "app": "Availability of schooling."
+    },
+    {
+     "english": "Life expectancy",
+     "field": "en_definition",
+     "sheet": "Average lifespan in a population",
+     "app": "Average lifespan in a population."
+    },
+    {
+     "english": "Maternal health",
+     "field": "en_definition",
+     "sheet": "Care for women during pregnancy",
+     "app": "Care for women during pregnancy."
+    },
+    {
+     "english": "Education",
+     "field": "en_definition",
+     "sheet": "Process of acquiring knowledge and skills",
+     "app": "Process of acquiring knowledge and skills."
+    },
+    {
+     "english": "Sanitation",
+     "field": "en_definition",
+     "sheet": "Hygienic disposal of waste",
+     "app": "Hygienic disposal of waste."
+    },
+    {
+     "english": "Poverty",
+     "field": "to_definition",
+     "sheet": "Fusimo'omo he ngaahi feima'u tefito 'o e mo'ui.",
+     "app": ""
+    },
+    {
+     "english": "Social protection",
+     "field": "en_definition",
+     "sheet": "Systems to support vulnerable populations",
+     "app": "Systems to support vulnerable populations."
+    },
+    {
+     "english": "Social protection",
+     "field": "to_definition",
+     "sheet": "Sisitemi ke poupou'i e kakai lavea ngofua",
+     "app": ""
+    },
+    {
+     "english": "Pandemic preparedness",
+     "field": "en_definition",
+     "sheet": "Readiness for global health crises",
+     "app": "Readiness for global health crises."
+    },
+    {
+     "english": "Education equity",
+     "field": "en_definition",
+     "sheet": "Fair access to learning opportunities",
+     "app": "Fair access to learning opportunities."
+    },
+    {
+     "english": "Teacher training",
+     "field": "en_definition",
+     "sheet": "Preparing educators for quality teaching",
+     "app": "Preparing educators for quality teaching."
+    },
+    {
+     "english": "Nutrition",
+     "field": "en_definition",
+     "sheet": "Intake of essential nutrients for health",
+     "app": "Intake of essential nutrients for health."
+    },
+    {
+     "english": "Nutrition",
+     "field": "to_definition",
+     "sheet": "Ma'u me'atokoni ivi'ia ki he mo'ui lelei 'a e sino",
+     "app": ""
+    },
+    {
+     "english": "Agroecology",
+     "field": "en_definition",
+     "sheet": "Ecological principles in farming",
+     "app": "Ecological principles in farming."
+    },
+    {
+     "english": "Microfinance",
+     "field": "en_definition",
+     "sheet": "Small-scale financial services for the poor",
+     "app": "Small-scale financial services for the poor."
+    },
+    {
+     "english": "Microfinance",
+     "field": "to_definition",
+     "sheet": "Kautaha iiki fakataumu'a ki he nō ki he masivá",
+     "app": ""
+    },
+    {
+     "english": "Resource access",
+     "field": "en_definition",
+     "sheet": "Availability of essentials like food and water",
+     "app": "Availability of essentials like food and water."
+    },
+    {
+     "english": "Resource access",
+     "field": "to_definition",
+     "sheet": "Ma’ungofua 'o e koloa mahu'inga hangē ko e me'atokoni mo e vai",
+     "app": ""
+    },
+    {
+     "english": "Famine",
+     "field": "en_definition",
+     "sheet": "Extreme scarcity of food",
+     "app": "Extreme scarcity of food."
+    },
+    {
+     "english": "Famine",
+     "field": "to_definition",
+     "sheet": "Si'i e me'atokoni he fonua",
+     "app": ""
+    },
+    {
+     "english": "Non-Communicable diseases",
+     "field": "en_definition",
+     "sheet": "Chronic illnesses like diabetes",
+     "app": "Chronic illnesses like diabetes."
+    },
+    {
+     "english": "Disease prevention",
+     "field": "en_definition",
+     "sheet": "Measures to reduce illness",
+     "app": "Measures to reduce illness."
+    },
+    {
+     "english": "Health",
+     "field": "en_definition",
+     "sheet": "State of physical and mental well-being",
+     "app": "State of physical and mental well-being."
+    },
+    {
+     "english": "Vocational training",
+     "field": "en_definition",
+     "sheet": "Skills for specific trades",
+     "app": "Skills for specific trades."
+    },
+    {
+     "english": "Eradication",
+     "field": "en_definition",
+     "sheet": "Complete elimination of poverty or hunger",
+     "app": "Complete elimination of poverty or hunger."
+    },
+    {
+     "english": "Eradication",
+     "field": "to_definition",
+     "sheet": "Fakangata faka’aufuli e masivá mo e fiekaiá",
+     "app": ""
+    },
+    {
+     "english": "Soil health",
+     "field": "en_definition",
+     "sheet": "Condition of soil for sustainable use",
+     "app": "Condition of soil for sustainable use."
+    },
+    {
+     "english": "Soil health",
+     "field": "to_definition",
+     "sheet": "Tukunga 'o e kelekele ke makupusi hono ngoue'i",
+     "app": ""
+    },
+    {
+     "english": "Sustainable agriculture",
+     "field": "en_definition",
+     "sheet": "Farming that preserves resources",
+     "app": "Farming that preserves resources."
+    },
+    {
+     "english": "Early childhood education",
+     "field": "en_definition",
+     "sheet": "Learning for young children",
+     "app": "Learning for young children."
+    },
+    {
+     "english": "Food Waste",
+     "field": "en_definition",
+     "sheet": "Discarded edible food",
+     "app": "Discarded edible food."
+    },
+    {
+     "english": "Food Waste",
+     "field": "to_definition",
+     "sheet": "Laku 'o e me'atokoní kei lelei",
+     "app": ""
+    },
+    {
+     "english": "Income gap",
+     "field": "to_definition",
+     "sheet": "Faikehekehe 'i he vahe mā'olungá mo e ma'ulalo",
+     "app": ""
+    },
+    {
+     "english": "Biodiversity",
+     "field": "en_definition",
+     "sheet": "Variety of species in agriculture",
+     "app": "Variety of species in agriculture."
+    },
+    {
+     "english": "Biodiversity",
+     "field": "to_definition",
+     "sheet": "Fa'ahinga me'a mo'ui kehekehe he fua 'o e fonua",
+     "app": ""
+    },
+    {
+     "english": "Vaccination",
+     "field": "en_definition",
+     "sheet": "Immunization against diseases",
+     "app": "Immunization against diseases."
+    },
+    {
+     "english": "Learning outcomes",
+     "field": "en_definition",
+     "sheet": "Measurable educational results",
+     "app": "Measurable educational results."
+    },
+    {
+     "english": "Malnutrition",
+     "field": "en_definition",
+     "sheet": "Deficiency or excess in nutrient intake",
+     "app": "Deficiency or excess in nutrient intake."
+    },
+    {
+     "english": "Malnutrition",
+     "field": "to_definition",
+     "sheet": "Si'i e ivi fakame'a tokoni 'oku ma'u",
+     "app": ""
+    },
+    {
+     "english": "Economic resilience",
+     "field": "en_definition",
+     "sheet": "Ability to withstand financial shocks",
+     "app": "Ability to withstand financial shocks."
+    },
+    {
+     "english": "Economic resilience",
+     "field": "to_definition",
+     "sheet": "Malohinga 'oku ne matatali hā uesia fakapa'anga",
+     "app": ""
+    },
+    {
+     "english": "Child mortality",
+     "field": "en_definition",
+     "sheet": "Death rate of children under five",
+     "app": "Death rate of children under five."
+    },
+    {
+     "english": "Mental health",
+     "field": "en_definition",
+     "sheet": "Emotional and psychological wellness",
+     "app": "Emotional and psychological wellness."
+    },
+    {
+     "english": "Inclusive education",
+     "field": "en_definition",
+     "sheet": "Schooling for all abilities",
+     "app": "Schooling for all abilities."
+    },
+    {
+     "english": "Universal basic Income",
+     "field": "en_definition",
+     "sheet": "Regular payment to all citizens",
+     "app": "Regular payment to all citizens."
+    },
+    {
+     "english": "Universal basic Income",
+     "field": "to_definition",
+     "sheet": "Vahe tu'uma'u ma 'a e kainanga e fonuá",
+     "app": ""
+    },
+    {
+     "english": "Financial inclusion",
+     "field": "en_definition",
+     "sheet": "Access to affordable finance",
+     "app": "Access to affordable finance."
+    },
+    {
+     "english": "Financial inclusion",
+     "field": "to_definition",
+     "sheet": "Malava ke nō [pea totongi] pa'anga",
+     "app": ""
+    },
+    {
+     "english": "Digital literacy",
+     "field": "en_definition",
+     "sheet": "Skills for using technology",
+     "app": "Skills for using technology."
+    }
+   ]
+  }
+ }
+}
