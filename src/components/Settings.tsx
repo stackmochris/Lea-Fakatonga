@@ -1,4 +1,5 @@
 import type { Direction, TextSize, ThemePreference } from "../preferences";
+import DirectionSeg from "./DirectionSeg";
 
 type Props = {
   direction: Direction;
@@ -13,54 +14,27 @@ export default function Settings({ direction, textSize, theme, onDirection, onTe
   return (
     <article className="page-pane">
       <div className="page-wrap">
-        <h2 id="page-title" tabIndex={-1} className="page-title">
+        <h1 id="page-title" tabIndex={-1} className="page-title">
           Settings
-        </h2>
+        </h1>
+        <section className="setting">
+          <h2 className="section-label">Direction</h2>
+          <p className="setting-help">The headword is shown first in the list and in search.</p>
+          <DirectionSeg direction={direction} onChange={onDirection} />
+        </section>
         <fieldset className="setting">
-          <legend>Translation direction</legend>
-          <p className="setting-help">The headword is shown first in lists, term details, and search results.</p>
+          <legend className="section-label">Text size</legend>
           <label className="option">
-            <input
-              type="radio"
-              name="direction"
-              checked={direction === "en-to"}
-              onChange={() => onDirection("en-to")}
-            />
-            <span>English → Tongan</span>
-          </label>
-          <label className="option">
-            <input
-              type="radio"
-              name="direction"
-              checked={direction === "to-en"}
-              onChange={() => onDirection("to-en")}
-            />
-            <span>Tongan → English</span>
-          </label>
-        </fieldset>
-        <fieldset className="setting">
-          <legend>Text size</legend>
-          <label className="option">
-            <input
-              type="radio"
-              name="text-size"
-              checked={textSize === "normal"}
-              onChange={() => onTextSize("normal")}
-            />
+            <input type="radio" name="text-size" checked={textSize === "normal"} onChange={() => onTextSize("normal")} />
             <span>Normal</span>
           </label>
           <label className="option">
-            <input
-              type="radio"
-              name="text-size"
-              checked={textSize === "large"}
-              onChange={() => onTextSize("large")}
-            />
+            <input type="radio" name="text-size" checked={textSize === "large"} onChange={() => onTextSize("large")} />
             <span>Large</span>
           </label>
         </fieldset>
         <fieldset className="setting">
-          <legend>Theme</legend>
+          <legend className="section-label">Theme</legend>
           <label className="option">
             <input type="radio" name="theme" checked={theme === "light"} onChange={() => onTheme("light")} />
             <span>Light</span>

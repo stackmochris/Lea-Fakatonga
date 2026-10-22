@@ -1,11 +1,15 @@
-import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { useCallback, useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { letterId, letterOf, scrubberLetters } from "./alpha";
+import { APP_NAME } from "./brand";
 import About from "./components/About";
+import AlphaIndex from "./components/AlphaIndex";
+import DirectionSeg from "./components/DirectionSeg";
 import Drawer from "./components/Drawer";
+import { CloseIcon, HamburgerIcon, SearchIcon } from "./components/Icons";
+import Settings from "./components/Settings";
+import Sheet from "./components/Sheet";
 import TermCard from "./components/TermCard";
 import TermDetail from "./components/TermDetail";
-import Settings from "./components/Settings";
-import { FoiHea, ManuluaMark } from "./components/Motifs";
-import { CloseIcon, MoonIcon, SearchIcon, SunIcon } from "./components/Icons";
 import { professions } from "./data/professions";
 import {
   applyDirection,
@@ -14,13 +18,14 @@ import {
   getStoredDirection,
   getStoredTextSize,
   getStoredThemePreference,
-  resolveTheme,
   type Direction,
   type TextSize,
   type ThemePreference,
 } from "./preferences";
 import { readRoute, routeHash, type Page } from "./route";
 import { fold, searchRank, sortLabel } from "./search";
+import type { TermEntry } from "./types";
+import { useHideOnScroll } from "./useHideOnScroll";
 
 function knownSlug(slug: string) {
   return professions.some((pack) => pack.slug === slug) ? slug : (professions[0]?.slug ?? "");
@@ -43,16 +48,35 @@ export default function App() {
   const [professionSlug, setProfessionSlug] = useState(boot.current.slug);
   const [selectedId, setSelectedId] = useState<string | null>(boot.current.id);
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("All");
+  const [searching, setSearching] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const listRef = useRef<HTMLElement>(null);
+  const [scrubbing, setScrubbing] = useState(false);
+  const [covered, setCovered] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [sheetEntry, setSheetEntry] = useState<TermEntry | null>(null);
+  const [wide, setWide] = useState(() => window.matchMedia("(min-width: 900px)").matches);
+  const [riseOn, setRiseOn] = useState(true);
+  const [listFade, setListFade] = useState(false);
+
   const frameRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLButtonElement>(null);
-  const historyReady = useRef(false);
+  const listScrollRef = useRef<HTMLDivElement>(null);
+  const windowScroller = useRef<HTMLElement | null>(null);
+  const historyMode = useRef<"push" | "replace">("push");
+  const seeded = useRef(false);
+  const previousWasList = useRef(false);
+  const slugRef = useRef(boot.current.slug);
+  const toastTimer = useRef(0);
+  const skipDrawerClose = useRef(true);
+  const wideRef = useRef(window.matchMedia("(min-width: 900px)").matches);
+  const savedScroll = useRef(0);
+  const scrollPin = useRef<number[]>([]);
+  const returnTerm = useRef<string | null>(null);
+  const directionReady = useRef(false);
 
   const profession = professions.find((pack) => pack.slug === professionSlug) ?? professions[0];
-  const resolvedTheme = resolveTheme(themePref);
   const tonganFirst = direction === "to-en";
+  const routeKey = `${page}:${professionSlug}:${selectedId ?? ""}`;
 
   const entries = useMemo(() => {
     if (!profession) return [];
@@ -62,29 +86,10 @@ export default function App() {
     );
   }, [profession, direction, tonganFirst]);
 
-  const categories = useMemo(() => {
-    const seen: string[] = [];
-    for (const entry of profession?.entries ?? []) {
-      if (!seen.includes(entry.category)) seen.push(entry.category);
-    }
-    return seen;
-  }, [profession]);
-
-  const categoryCounts = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const entry of profession?.entries ?? []) {
-      counts.set(entry.category, (counts.get(entry.category) ?? 0) + 1);
-    }
-    return counts;
-  }, [profession]);
-
   const deferredQuery = useDeferredValue(query);
   const needle = fold(deferredQuery.trim());
   const filtered = useMemo(() => {
-    const hits = entries.filter((entry) => {
-      const inCategory = category === "All" || entry.category === category;
-      return inCategory && searchRank(entry, needle, direction) < 2;
-    });
+    const hits = entries.filter((entry) => searchRank(entry, needle, direction) < 2);
     if (!needle) return hits;
     const locale = tonganFirst ? "to" : "en";
     return hits.sort((a, b) => {
@@ -92,9 +97,53 @@ export default function App() {
       if (rank !== 0) return rank;
       return sortLabel(a, direction).localeCompare(sortLabel(b, direction), locale, { sensitivity: "base" });
     });
-  }, [entries, category, needle, direction, tonganFirst]);
+  }, [entries, needle, direction, tonganFirst]);
+
+  const grouped = useMemo(() => {
+    const groups = new Map<string, TermEntry[]>();
+    for (const entry of filtered) {
+      const label = letterOf(sortLabel(entry, direction));
+      const list = groups.get(label);
+      if (list) list.push(entry);
+      else groups.set(label, [entry]);
+    }
+    const letters = scrubberLetters(direction, groups.keys()).map((label) => ({
+      label,
+      enabled: groups.has(label),
+      targetId: letterId(label),
+    }));
+    return { groups, letters };
+  }, [filtered, direction]);
 
   const selected = profession?.entries.find((entry) => entry.id === selectedId) ?? null;
+  const sheetOpen = !wide && page === "home" && selected !== null;
+
+  const headerHidden = useHideOnScroll({
+    scrollerRef: wide ? listScrollRef : windowScroller,
+    enabled: !wide && page === "home",
+    forceShow: drawerOpen || searching || scrubbing,
+    routeKey,
+  });
+  const hideHeader = headerHidden && !drawerOpen && !searching && !scrubbing && !wide && page === "home";
+
+  useEffect(() => {
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+    return () => {
+      window.history.scrollRestoration = previous;
+    };
+  }, []);
+
+  useEffect(() => {
+    wideRef.current = wide;
+  }, [wide]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 900px)");
+    const onChange = () => setWide(media.matches);
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     applyTheme(themePref);
@@ -113,28 +162,38 @@ export default function App() {
     applyDirection(direction);
   }, [direction]);
 
-  useLayoutEffect(() => {
-    const node = frameRef.current;
-    if (!node) return;
-    if (drawerOpen) node.setAttribute("inert", "");
-    else node.removeAttribute("inert");
-  }, [drawerOpen]);
+  useEffect(() => {
+    slugRef.current = professionSlug;
+  }, [professionSlug]);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setRiseOn(false), 1200);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    if (!directionReady.current) {
+      directionReady.current = true;
+      return;
+    }
+    setListFade(true);
+    const timeout = window.setTimeout(() => setListFade(false), 160);
+    return () => window.clearTimeout(timeout);
+  }, [direction]);
 
   useEffect(() => {
     if (page === "about") {
-      document.title = "About · Lea Fakatonga";
+      document.title = `About · ${APP_NAME}`;
       return;
     }
     if (page === "settings") {
-      document.title = "Settings · Lea Fakatonga";
+      document.title = `Settings · ${APP_NAME}`;
       return;
     }
     if (!profession) return;
     const term = profession.entries.find((entry) => entry.id === selectedId);
     const head = term ? sortLabel(term, direction) : profession.name_en;
-    document.title = term
-      ? `${head} · ${profession.name_en} · Lea Fakatonga`
-      : `${profession.name_en} · Lea Fakatonga`;
+    document.title = term ? `${head} · ${profession.name_en} · ${APP_NAME}` : `${profession.name_en} · ${APP_NAME}`;
   }, [page, profession, selectedId, direction]);
 
   useEffect(() => {
@@ -147,30 +206,81 @@ export default function App() {
     if (!profession) return;
     const next = routeHash(page, profession.slug, page === "home" ? selectedId : null);
     const url = `${window.location.pathname}${window.location.search}${next}`;
-    if (!historyReady.current) {
-      historyReady.current = true;
+    if (!seeded.current) {
+      seeded.current = true;
       if (window.location.hash !== next) window.history.replaceState(null, "", url);
       return;
     }
-    if (window.location.hash !== next) window.history.pushState(null, "", url);
+    if (window.location.hash === next) return;
+    // Read the position captured on the click. A fresh read here is often already 0,
+    // because the browser resets scroll while applying the history entry.
+    const openingDetail = page === "home" && selectedId !== null;
+    const y = openingDetail ? savedScroll.current : readScroll();
+    const state = { leaScroll: y };
+    const mode = historyMode.current;
+    historyMode.current = "push";
+    if (mode === "replace") {
+      window.history.replaceState(state, "", url);
+    } else {
+      if (openingDetail) window.history.replaceState(state, "", window.location.href);
+      window.history.pushState(state, "", url);
+    }
+    pinScroll(y);
   }, [page, profession, selectedId]);
 
   useEffect(() => {
     const onPop = () => {
       const route = readRoute();
-      setPage(route.page);
+      previousWasList.current = false;
       setDrawerOpen(false);
-      if (route.page !== "home") return;
-      const pack = professions.find((item) => item.slug === route.slug);
+      setPage(route.page);
+      if (route.page !== "home") {
+        setSelectedId(null);
+        return;
+      }
+      const slug = knownSlug(route.slug);
+      const pack = professions.find((item) => item.slug === slug);
       if (!pack) return;
+      if (slugRef.current !== pack.slug) setQuery("");
       setProfessionSlug(pack.slug);
-      setCategory("All");
-      setQuery("");
       setSelectedId(route.id && pack.entries.some((entry) => entry.id === route.id) ? route.id : null);
+      const state = window.history.state as { leaScroll?: number } | null;
+      const y = typeof state?.leaScroll === "number" ? state.leaScroll : savedScroll.current;
+      savedScroll.current = y;
+      pinScroll(y);
     };
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
   }, []);
+
+  useEffect(() => {
+    if (skipDrawerClose.current) {
+      skipDrawerClose.current = false;
+      return;
+    }
+    setDrawerOpen(false);
+  }, [routeKey]);
+
+  useEffect(() => {
+    if (page === "home" && selected) setSheetEntry(selected);
+  }, [page, selected]);
+
+  useEffect(() => {
+    if (wide) {
+      setSheetEntry(null);
+      setCovered(false);
+    }
+  }, [wide]);
+
+  useEffect(() => {
+    const scroller = wide ? listScrollRef.current : document.scrollingElement;
+    scroller?.scrollTo({ top: 0 });
+  }, [query, professionSlug, direction, wide]);
+
+  useEffect(() => {
+    if (!wide || !selectedId || page !== "home") return;
+    document.getElementById(`term-${selectedId}`)?.scrollIntoView({ block: "nearest" });
+  }, [wide, selectedId, page]);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -189,40 +299,113 @@ export default function App() {
           setQuery("");
           return;
         }
-        if (selectedId && page === "home") setSelectedId(null);
+        if (selectedId && page === "home") closeDetail();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [query, selectedId, drawerOpen, page]);
+  });
+
+  useLayoutEffect(() => {
+    const node = frameRef.current;
+    if (!node) return;
+    const y = window.scrollY;
+    if (drawerOpen || (!wide && sheetEntry)) node.setAttribute("inert", "");
+    else node.removeAttribute("inert");
+    if (window.scrollY !== y) window.scrollTo(0, y);
+  }, [drawerOpen, wide, sheetEntry]);
 
   useEffect(() => {
-    listRef.current?.scrollTo({ top: 0 });
-  }, [query, category, professionSlug, direction]);
+    if (selectedId || wide) return;
+    const id = returnTerm.current;
+    if (!id) return;
+    const timer = window.setTimeout(() => {
+      returnTerm.current = null;
+      const y = savedScroll.current;
+      document.getElementById(`term-${id}`)?.focus({ preventScroll: true });
+      writeScroll(y);
+    }, 320);
+    return () => window.clearTimeout(timer);
+  }, [selectedId, wide]);
 
-  useEffect(() => {
-    if (!selectedId || page !== "home") return;
-    document.getElementById(`term-${selectedId}`)?.scrollIntoView({ block: "nearest" });
-  }, [selectedId, page]);
+  const onCover = useCallback((next: boolean) => setCovered(next), []);
+  const onExited = useCallback(() => setSheetEntry(null), []);
 
-  if (!profession) {
-    return <p className="empty">No glossary packs are loaded.</p>;
+  function readScroll() {
+    if (wideRef.current && listScrollRef.current) return listScrollRef.current.scrollTop;
+    return window.scrollY;
   }
 
-  function selectProfession(slug: string) {
-    setProfessionSlug(slug);
-    setCategory("All");
-    setQuery("");
+  function writeScroll(y: number) {
+    if (wideRef.current && listScrollRef.current) listScrollRef.current.scrollTop = y;
+    else window.scrollTo(0, y);
+  }
+
+  function pinScroll(y: number) {
+    for (const id of scrollPin.current) window.clearTimeout(id);
+    writeScroll(y);
+    window.requestAnimationFrame(() => writeScroll(y));
+    scrollPin.current = [0, 60, 120, 300].map((delay) => window.setTimeout(() => writeScroll(y), delay));
+  }
+
+  function openTerm(id: string) {
+    if (id === selectedId && page === "home") return;
+    savedScroll.current = readScroll();
+    returnTerm.current = id;
+    previousWasList.current = page === "home" && selectedId === null;
+    setPage("home");
+    setSelectedId(id);
+  }
+
+  function closeDetail() {
+    if (previousWasList.current) {
+      previousWasList.current = false;
+      window.history.back();
+      return;
+    }
+    historyMode.current = "replace";
     setSelectedId(null);
   }
 
-  function openSubject(slug: string) {
-    selectProfession(slug);
+  function selectProfession(slug: string) {
+    returnTerm.current = null;
+    setProfessionSlug(slug);
+    setQuery("");
+    setSelectedId(null);
     setPage("home");
-    setDrawerOpen(false);
+  }
+
+  function goHome() {
+    if (page === "home" && selectedId) {
+      closeDetail();
+      return;
+    }
+    setPage("home");
+    setSelectedId(null);
+  }
+
+  async function copyEntry(entry: TermEntry) {
+    const text = [entry.en_term, entry.to_term].map((part) => part.trim()).filter(Boolean).join("\n");
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+    }
+    setToast(true);
+    window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setToast(false), 1600);
   }
 
   function onTabKeyDown(event: ReactKeyboardEvent<HTMLDivElement>) {
+    if (!profession) return;
     const index = professions.findIndex((pack) => pack.slug === profession.slug);
     let next = index;
     if (event.key === "ArrowRight") next = (index + 1) % professions.length;
@@ -236,274 +419,226 @@ export default function App() {
     window.setTimeout(() => document.getElementById(`tab-${pack.slug}`)?.focus(), 0);
   }
 
-  const trimmed = deferredQuery.trim();
-  const noun = filtered.length === 1 ? "term" : "terms";
-  const resultBits = [`${filtered.length} ${noun}`];
-  if (category !== "All") resultBits.push(`in ${category}`);
-  if (trimmed) resultBits.push(`for “${trimmed}”`);
-  const resultLabel = resultBits.join(" ");
-  const home = page === "home";
+  if (!profession) {
+    return <p className="empty">No glossary packs are loaded.</p>;
+  }
+
+  const noun = filtered.length === 1 ? "word" : "words";
+  const appClass = ["app", hideHeader ? "is-header-hidden" : "", covered && !wide ? "is-sheet" : ""].filter(Boolean).join(" ");
+  let running = 0;
 
   return (
-    <>
-      <div ref={frameRef} className={home && selected ? "app-frame is-detail" : "app-frame"}>
+    <div className={appClass}>
+      <div ref={frameRef} className="app-frame">
         <a className="skip" href="#main">
           Skip to content
         </a>
-        <div className="nifo-band" aria-hidden="true" />
         <header className="topbar">
-          <div className="brand-row">
-            <div className="brand">
-              <button
-                ref={menuRef}
-                type="button"
-                className="menu-button"
-                aria-label="Menu"
-                aria-haspopup="dialog"
-                aria-expanded={drawerOpen}
-                aria-controls="app-drawer"
-                onClick={() => setDrawerOpen(true)}
-              >
-                <ManuluaMark />
-              </button>
-              <div>
-                <h1 className="brand-name">Lea Fakatonga</h1>
-                <p className="brand-tag">Specialist terminology dictionary</p>
-              </div>
-            </div>
-            <button
-              type="button"
-              className="theme-toggle"
-              aria-pressed={resolvedTheme === "dark"}
-              aria-label={resolvedTheme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-              onClick={() => setThemePref(resolvedTheme === "dark" ? "light" : "dark")}
-            >
-              {resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}
+          <button
+            ref={menuRef}
+            type="button"
+            className="menu-button"
+            aria-label="Menu"
+            aria-haspopup="dialog"
+            aria-expanded={drawerOpen}
+            aria-controls="app-drawer"
+            onClick={() => setDrawerOpen(true)}
+          >
+            <HamburgerIcon open={drawerOpen} />
+          </button>
+          <p className="brand-title">{APP_NAME}</p>
+          {page === "home" ? (
+            <button type="button" className="icon-btn" aria-label="Search" onClick={() => document.getElementById("term-search")?.focus()}>
+              <SearchIcon />
             </button>
-            {home && (
-              <div className="search-row">
-                <form
-                  className={trimmed ? "search has-query" : "search"}
-                  role="search"
-                  onSubmit={(event) => event.preventDefault()}
-                >
-                  <label className="sr-only" htmlFor="term-search">
-                    {tonganFirst ? "Search Tongan or English terms" : "Search English or Tongan terms"}
-                  </label>
-                  <SearchIcon />
-                  <input
-                    id="term-search"
-                    type="search"
-                    placeholder={tonganFirst ? "Search Tongan or English" : "Search English or Tongan"}
-                    value={query}
-                    autoComplete="off"
-                    autoCapitalize="off"
-                    autoCorrect="off"
-                    spellCheck={false}
-                    enterKeyHint="search"
-                    onChange={(event) => setQuery(event.target.value)}
-                  />
-                  {trimmed ? (
-                    <button type="button" className="search-clear" aria-label="Clear search" onClick={() => setQuery("")}>
-                      <CloseIcon />
+          ) : (
+            <span />
+          )}
+        </header>
+        {page === "about" && <About />}
+        {page === "settings" && (
+          <Settings
+            direction={direction}
+            textSize={textSize}
+            theme={themePref}
+            onDirection={setDirection}
+            onTextSize={setTextSize}
+            onTheme={setThemePref}
+          />
+        )}
+        {page === "home" && (
+          <div className="stage">
+            <div className="list-shell">
+              <div ref={listScrollRef} className="list-scroll" id="main">
+                <h1 className="sr-only">{profession.name_en}</h1>
+                <div className={searching ? "toolbar is-searching" : "toolbar"}>
+                  <form className="search" role="search" onSubmit={(event) => event.preventDefault()}>
+                    <label className="sr-only" htmlFor="term-search">
+                      Search words
+                    </label>
+                    <SearchIcon />
+                    <input
+                      id="term-search"
+                      type="search"
+                      placeholder="Search"
+                      value={query}
+                      autoComplete="off"
+                      autoCapitalize="off"
+                      autoCorrect="off"
+                      spellCheck={false}
+                      enterKeyHint="search"
+                      onFocus={() => setSearching(true)}
+                      onBlur={(event) => {
+                        if ((event.relatedTarget as HTMLElement | null)?.id === "search-cancel") return;
+                        setSearching(false);
+                      }}
+                      onChange={(event) => setQuery(event.target.value)}
+                    />
+                    {query && !searching && (
+                      <button type="button" className="search-clear" aria-label="Clear search" onClick={() => setQuery("")}>
+                        <CloseIcon />
+                      </button>
+                    )}
+                  </form>
+                  {searching ? (
+                    <button
+                      id="search-cancel"
+                      type="button"
+                      className="ghost cancel"
+                      onMouseDown={(event) => event.preventDefault()}
+                      onClick={() => {
+                        setQuery("");
+                        setSearching(false);
+                        (document.getElementById("term-search") as HTMLInputElement | null)?.blur();
+                      }}
+                    >
+                      Cancel
                     </button>
                   ) : (
-                    <kbd className="search-kbd" aria-hidden="true">
-                      /
-                    </kbd>
+                    <DirectionSeg direction={direction} onChange={setDirection} />
                   )}
-                </form>
-                <button
-                  type="button"
-                  className="dir-toggle"
-                  aria-label={
-                    tonganFirst
-                      ? "Tongan shown first. Switch to English first."
-                      : "English shown first. Switch to Tongan first."
-                  }
-                  onClick={() => setDirection(tonganFirst ? "en-to" : "to-en")}
-                >
-                  <span aria-hidden="true">{tonganFirst ? "TO → EN" : "EN → TO"}</span>
-                </button>
+                </div>
+                <p className="result-count" aria-live="polite">
+                  <span key={`${filtered.length}-${needle}`} className="count-fade">
+                    {filtered.length} {noun}
+                  </span>
+                </p>
+                <div className="chips" role="tablist" aria-label="Subjects" onKeyDown={onTabKeyDown}>
+                  {professions.map((pack) => {
+                    const active = pack.slug === profession.slug;
+                    return (
+                      <button
+                        key={pack.slug}
+                        type="button"
+                        className={active ? "chip fill" : "chip"}
+                        role="tab"
+                        id={`tab-${pack.slug}`}
+                        aria-selected={active}
+                        tabIndex={active ? 0 : -1}
+                        onClick={() => selectProfession(pack.slug)}
+                      >
+                        {pack.name_en}
+                        <span className="chip-count">{pack.entries.length}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                {filtered.length === 0 ? (
+                  <div className="empty card">
+                    <h2>No matching words</h2>
+                    <p>{needle ? `Nothing matches “${deferredQuery.trim()}”.` : "Nothing to show."}</p>
+                    <button
+                      type="button"
+                      className="ghost"
+                      onClick={() => {
+                        setQuery("");
+                        setSearching(false);
+                      }}
+                    >
+                      Clear search
+                    </button>
+                  </div>
+                ) : (
+                  <div className={listFade ? "sections is-fading" : "sections"}>
+                    {grouped.letters.filter((letter) => letter.enabled).map((letter) => {
+                      const rows = grouped.groups.get(letter.label) ?? [];
+                      const start = running;
+                      running += rows.length;
+                      return (
+                        <section key={letter.label}>
+                          <h2 className="letter-head" id={letter.targetId} data-letter={letter.label}>
+                            {letter.label}
+                          </h2>
+                          <ul>
+                            {rows.map((entry, index) => {
+                              const globalIndex = start + index;
+                              return (
+                                <TermCard
+                                  key={entry.id}
+                                  entry={entry}
+                                  selected={entry.id === selectedId}
+                                  query={deferredQuery}
+                                  direction={direction}
+                                  onSelect={openTerm}
+                                  rise={riseOn && globalIndex < 12}
+                                  delay={globalIndex * 30}
+                                />
+                              );
+                            })}
+                          </ul>
+                        </section>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+              <AlphaIndex letters={grouped.letters} wide={wide} onScrubbing={setScrubbing} />
+            </div>
+            {wide && (
+              <div className="detail-pane" aria-label="Term detail">
+                {selected ? (
+                  <TermDetail entry={selected} direction={direction} layout="inline" onCopy={() => copyEntry(selected)} />
+                ) : (
+                  <div className="empty-detail">
+                    <p>Choose a word</p>
+                  </div>
+                )}
               </div>
             )}
           </div>
-          {home && (
-            <div className="tablist" role="tablist" aria-label="Subjects" onKeyDown={onTabKeyDown}>
-              {professions.map((pack) => {
-                const active = pack.slug === profession.slug;
-                return (
-                  <button
-                    key={pack.slug}
-                    type="button"
-                    className="tab"
-                    role="tab"
-                    id={`tab-${pack.slug}`}
-                    aria-selected={active}
-                    aria-controls="glossary-results"
-                    aria-label={`${pack.name_en}. ${pack.name_to}. ${pack.entries.length} terms`}
-                    tabIndex={active ? 0 : -1}
-                    onClick={() => selectProfession(pack.slug)}
-                  >
-                    <span className="tab-en">
-                      {pack.name_en}
-                      <span className="tab-count">
-                        {active ? <FoiHea className="foi-badge" /> : null}
-                        {pack.entries.length}
-                      </span>
-                    </span>
-                    <span className="tab-to" lang="to" translate="no">
-                      {pack.name_to}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
-          {home && (
-            <div className="chips" role="group" aria-label="Categories">
-              <button
-                type="button"
-                className="chip"
-                aria-pressed={category === "All"}
-                onClick={() => setCategory("All")}
-              >
-                All
-                <span className="chip-count">{profession.entries.length}</span>
-              </button>
-              {categories.map((name) => (
-                <button
-                  key={name}
-                  type="button"
-                  className="chip"
-                  aria-pressed={category === name}
-                  onClick={() => setCategory(name)}
-                >
-                  {name}
-                  <span className="chip-count">{categoryCounts.get(name) ?? 0}</span>
-                </button>
-              ))}
-            </div>
-          )}
-        </header>
-        <div className="nifo-band" aria-hidden="true" />
-        <main id="main" className={home ? "workspace" : "workspace is-page"}>
-          {page === "about" && <About professions={professions} onOpenSubject={openSubject} />}
-          {page === "settings" && (
-            <Settings
-              direction={direction}
-              textSize={textSize}
-              theme={themePref}
-              onDirection={setDirection}
-              onTextSize={setTextSize}
-              onTheme={setThemePref}
-            />
-          )}
-          {home && (
-            <>
-              <section
-                ref={listRef}
-                id="glossary-results"
-                className="list-pane"
-                tabIndex={-1}
-                aria-label={`${profession.name_en} terms`}
-              >
-                <div className="list-head">
-                  <p className="list-subject" lang="to" translate="no">
-                    {profession.name_to}
-                  </p>
-                  <p className="result-meta" aria-live="polite">
-                    {resultLabel}
-                  </p>
-                </div>
-                {filtered.length === 0 ? (
-                  <div className="empty">
-                    <FoiHea className="foi-ornament" />
-                    <h2>No matching terms</h2>
-                    <p>
-                      {trimmed
-                        ? `Nothing in ${profession.name_en} matches “${trimmed}”${category !== "All" ? ` in ${category}` : ""}.`
-                        : `No terms in ${category}.`}
-                    </p>
-                    <button
-                      type="button"
-                      className="btn-primary"
-                      onClick={() => {
-                        setQuery("");
-                        setCategory("All");
-                      }}
-                    >
-                      Clear filters
-                    </button>
-                  </div>
-                ) : (
-                  <ul className="term-list">
-                    {filtered.map((entry) => (
-                      <TermCard
-                        key={entry.id}
-                        entry={entry}
-                        selected={entry.id === selected?.id}
-                        query={deferredQuery}
-                        direction={direction}
-                        onSelect={setSelectedId}
-                      />
-                    ))}
-                  </ul>
-                )}
-              </section>
-              <section className="detail-pane" aria-label="Term detail">
-                {selected ? (
-                  <TermDetail
-                    entry={selected}
-                    direction={direction}
-                    onBack={() => setSelectedId(null)}
-                    onSelectCategory={(name) => setCategory(name)}
-                  />
-                ) : (
-                  <div className="overview">
-                    <FoiHea className="foi-ornament" />
-                    <p className="kicker">Subject</p>
-                    <h2>{profession.name_en}</h2>
-                    <p className="overview-to" lang="to" translate="no">
-                      {profession.name_to}
-                    </p>
-                    <p className="overview-help">
-                      Choose a term on the left. English and Tongan are shown together, with the headword first.
-                    </p>
-                    <dl className="stats">
-                      <div>
-                        <dd>{profession.entries.length}</dd>
-                        <dt>
-                          <FoiHea className="foi-bullet" />
-                          Terms
-                        </dt>
-                      </div>
-                      <div>
-                        <dd>{categories.length}</dd>
-                        <dt>
-                          <FoiHea className="foi-bullet" />
-                          Categories
-                        </dt>
-                      </div>
-                    </dl>
-                  </div>
-                )}
-              </section>
-            </>
-          )}
-        </main>
-        <div className="nifo-band" aria-hidden="true" />
+        )}
       </div>
+      {!wide && sheetEntry && (
+        <Sheet
+          open={sheetOpen}
+          subject={profession.name_en}
+          onClose={closeDetail}
+          onCopy={() => copyEntry(sheetEntry)}
+          onCover={onCover}
+          onExited={onExited}
+        >
+          <TermDetail entry={sheetEntry} direction={direction} layout="sheet" onCopy={() => copyEntry(sheetEntry)} />
+        </Sheet>
+      )}
       <Drawer
         open={drawerOpen}
         page={page}
+        slug={profession.slug}
+        direction={direction}
+        professions={professions}
         returnFocus={menuRef}
         onClose={() => setDrawerOpen(false)}
-        onNavigate={(next) => {
-          setPage(next);
-          setDrawerOpen(false);
-        }}
+        onHome={goHome}
+        onAbout={() => setPage("about")}
+        onSettings={() => setPage("settings")}
+        onSubject={selectProfession}
+        onDirection={setDirection}
       />
-    </>
+      {toast && (
+        <div className="toast" role="status">
+          Copied
+        </div>
+      )}
+    </div>
   );
 }

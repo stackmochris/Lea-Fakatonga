@@ -2,17 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#C10020" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#8f1d22" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Kolosālio" />
     <meta
       name="description"
-      content="Lea Fakatonga is an English–Tongan specialist glossary."
+      content="Kolosālio is an English–Tongan glossary of specialist terms."
     />
-    <title>Lea Fakatonga · Specialist terminology dictionary</title>
-    <link rel="icon" href="%BASE_URL%manulua.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+    <title>Kolosālio</title>
+    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="%BASE_URL%icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="%BASE_URL%icon-192.png" />
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
     <script>
       try {
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
         var themePref = localStorage.getItem("lea-theme");
         var resolved = themePref === "dark" || themePref === "light"
           ? themePref
@@ -21,10 +26,8 @@
             : "light";
         document.documentElement.setAttribute("data-theme", resolved);
         document.documentElement.style.colorScheme = resolved;
-        if (resolved === "dark") {
-          var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute("content", "#100E0C");
-        }
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", resolved === "dark" ? "#0b0b0c" : "#8f1d22");
         if (localStorage.getItem("lea-text-size") === "large") {
           document.documentElement.setAttribute("data-text-size", "large");
         }
