@@ -7,7 +7,7 @@
     {
       "id": "income-gap",
       "en_term": "Income gap",
-      "to_term": "Faikehekehe he vāhenga",
+      "to_term": "Faikehekehe he vāhengá",
       "en_definition": "Disparity between high and low earners.",
       "to_definition": "",
       "category": "SDG 1: No Poverty",
@@ -20,7 +20,7 @@
     {
       "id": "eradication",
       "en_term": "Eradication",
-      "to_term": "Fakangata faka'aufuli e masiva mo e fiekaia",
+      "to_term": "Fakangata faka’aufuli",
       "en_definition": "Complete elimination of poverty or hunger.",
       "to_definition": "",
       "category": "SDG 1: No Poverty",
@@ -46,7 +46,7 @@
     {
       "id": "resource-access",
       "en_term": "Resource access",
-      "to_term": "Ma'ungofua 'o e koloa faka'aho",
+      "to_term": "Ma'u 'o e koloa",
       "en_definition": "Availability of essentials like food and water.",
       "to_definition": "",
       "category": "SDG 1: No Poverty",
@@ -59,7 +59,7 @@
     {
       "id": "financial-inclusion",
       "en_term": "Financial inclusion",
-      "to_term": "Malava ke nō pa'anga",
+      "to_term": "Kau mai he [ta'au 'o e] nō pa'anga",
       "en_definition": "Access to affordable finance.",
       "to_definition": "",
       "category": "SDG 1: No Poverty",
@@ -176,7 +176,7 @@
     {
       "id": "malnutrition",
       "en_term": "Malnutrition",
-      "to_term": "Si'i e ivi fakame'a tokoni 'oku ma'u",
+      "to_term": "Fasimanava",
       "en_definition": "Deficiency or excess in nutrient intake.",
       "to_definition": "",
       "category": "SDG 2: Zero Hunger",
@@ -189,7 +189,7 @@
     {
       "id": "food-security",
       "en_term": "Food security",
-      "to_term": "Malu 'o e ma'u'anga me'atokoni",
+      "to_term": "Malu 'a e ma'u'anga me'atokoní",
       "en_definition": "Reliable access to sufficient, nutritious food.",
       "to_definition": "",
       "category": "SDG 2: Zero Hunger",

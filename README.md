@@ -8,11 +8,11 @@ full brief.
 
 ## Status
 
-Three profession packs ship in `src/data/professions/`: Agriculture (`agriculture.json`),
-Computer Terms (`computer-terms.json`), and Sustainable Development Goals (`sdg.json`).
-They are imported by `src/data/professions/index.ts` and rendered as subject tabs.
-The JSON copy is the glossary; the interface does not rewrite it. `_template.json`
-is the schema for a new pack and is not registered.
+Profession packs live in `src/data/professions/*.json` and are registered in
+`src/data/professions/index.ts`. `npm run check:glossary` counts them and checks
+each row of `scripts/fixtures/sheet_terms.json` is represented, aside from the
+skips in `scripts/sheet-coverage.json`. `_template.json` is the schema for a new
+pack and is not registered.
 
 ## Stack
 

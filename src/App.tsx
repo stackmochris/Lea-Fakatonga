@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import { useDeferredValue, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import TermCard from "./components/TermCard";
 import TermDetail from "./components/TermDetail";
 import { BrandMark, TapaMedallion } from "./components/Tapa";
 import { CloseIcon, MoonIcon, SearchIcon, SunIcon } from "./components/Icons";
 import { professions } from "./data/professions";
-import { matchesQuery } from "./search";
+import { fold } from "./search";
 import { applyTheme, getStoredTheme, type Theme } from "./theme";
 
 function readHash(): { slug: string; id: string } {
@@ -61,13 +61,18 @@ export default function App() {
     return counts;
   }, [profession]);
 
+  const deferredQuery = useDeferredValue(query);
+  const indexed = useMemo(
+    () => entries.map((entry) => ({ entry, key: fold(`${entry.en_term}\n${entry.to_term}`) })),
+    [entries],
+  );
+  const needle = fold(deferredQuery.trim());
   const filtered = useMemo(
     () =>
-      entries.filter((entry) => {
-        if (category !== "All" && entry.category !== category) return false;
-        return matchesQuery(entry, query);
-      }),
-    [entries, category, query],
+      indexed
+        .filter(({ entry, key }) => (category === "All" || entry.category === category) && (needle === "" || key.includes(needle)))
+        .map(({ entry }) => entry),
+    [indexed, category, needle],
   );
 
   const selected = profession?.entries.find((entry) => entry.id === selectedId) ?? null;
@@ -169,7 +174,7 @@ export default function App() {
     window.setTimeout(() => document.getElementById(`tab-${pack.slug}`)?.focus(), 0);
   }
 
-  const trimmed = query.trim();
+  const trimmed = deferredQuery.trim();
   const noun = filtered.length === 1 ? "term" : "terms";
   const resultBits = [`${filtered.length} ${noun}`];
   if (category !== "All") resultBits.push(`in ${category}`);
@@ -327,7 +332,7 @@ export default function App() {
                   key={entry.id}
                   entry={entry}
                   selected={entry.id === selected?.id}
-                  query={query}
+                  query={deferredQuery}
                   onSelect={setSelectedId}
                 />
               ))}
