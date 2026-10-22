@@ -474,7 +474,7 @@ button { cursor: pointer; }
 
 mark {
   background: #f1c4c4;
-  color: inherit;
+  color: #0a0a0a;
   border-radius: 3px;
   padding: 0 1px;
 }
@@ -676,7 +676,8 @@ mark {
   padding: 5px 10px;
   border-radius: var(--r-pill);
   background: #ffd7a8;
-  color: var(--ink);
+  /* The peach stays light in both themes, so the label stays the dark ink. */
+  color: #0a0a0a;
   font-size: 13px;
   font-weight: 600;
 }
