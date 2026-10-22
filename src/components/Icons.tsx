@@ -58,12 +58,56 @@ export function SubjectsIcon({ className = "icon" }: IconProps) {
   );
 }
 
+export function SettingsIcon({ className = "icon" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
+      <path
+        d="M12 3.5 V6 M12 18 V20.5 M3.5 12 H6 M18 12 H20.5 M5.8 5.8 L7.6 7.6 M16.4 16.4 L18.2 18.2 M18.2 5.8 L16.4 7.6 M7.6 16.4 L5.8 18.2"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function AboutIcon({ className = "icon" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="2" />
       <path d="M12 11 V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
       <circle cx="12" cy="8" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function SunIcon({ className = "icon" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="3.25" fill="none" stroke="currentColor" strokeWidth="2" />
+      <path
+        d="M12 3.5 V6 M12 18 V20.5 M3.5 12 H6 M18 12 H20.5 M6.1 6.1 L7.8 7.8 M16.2 16.2 L17.9 17.9 M17.9 6.1 L16.2 7.8 M7.8 16.2 L6.1 17.9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function MoonIcon({ className = "icon" }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M15.2 3.8 A7.6 7.6 0 1 0 20.4 14.2 A6.2 6.2 0 0 1 15.2 3.8 Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

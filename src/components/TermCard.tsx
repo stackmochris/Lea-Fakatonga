@@ -11,9 +11,10 @@ type Props = {
   onSelect: (id: string) => void;
   rise: boolean;
   delay: number;
+  active?: boolean;
 };
 
-export default function TermCard({ entry, selected, query, direction, onSelect, rise, delay }: Props) {
+export default function TermCard({ entry, selected, query, direction, onSelect, rise, delay, active = false }: Props) {
   const copy = strings(direction);
   const draft = entry.to_term.trim() === "";
   const tonganFirst = direction === "to-en";
@@ -24,6 +25,7 @@ export default function TermCard({ entry, selected, query, direction, onSelect, 
     "term-row",
     draft ? "is-draft" : "",
     selected ? "is-selected" : "",
+    active ? "is-cursor" : "",
     secondaryText ? "" : "is-single",
     rise ? "rise" : "",
   ]

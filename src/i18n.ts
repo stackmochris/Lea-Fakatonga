@@ -25,7 +25,6 @@ export type Chrome = {
   directionHelp: string;
   settings: string;
   about: string;
-  aboutCredit: string;
   textSize: string;
   normal: string;
   large: string;
@@ -53,6 +52,8 @@ export type Chrome = {
   pronunciation: string;
   playPronunciation: string;
   letters: string;
+  aboutCredit: string;
+  keyHint: string;
 };
 
 const en: Chrome = {
@@ -70,7 +71,6 @@ const en: Chrome = {
   directionHelp: "The headword is shown first in the list and in search.",
   settings: "Settings",
   about: "About",
-  aboutCredit: "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.",
   textSize: "Text size",
   normal: "Normal",
   large: "Large",
@@ -98,6 +98,9 @@ const en: Chrome = {
   pronunciation: "Pronunciation",
   playPronunciation: "Play pronunciation",
   letters: "Letters",
+  aboutCredit:
+    "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.",
+  keyHint: "/ search · ↑↓ move · Enter open · Esc clear",
 };
 
 const to: Chrome = {
@@ -115,7 +118,6 @@ const to: Chrome = {
   directionHelp: "The headword is shown first in the list and in search.", // TODO verify
   settings: "Ngaahi Fokotuʻutuʻu", // Pending a native-speaker check.
   about: "Fekauʻaki mo e Polokalama", // Pending a native-speaker check.
-  aboutCredit: "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.", // TODO verify
   textSize: "Text size", // TODO verify
   normal: "Normal", // TODO verify
   large: "Large", // TODO verify
@@ -143,6 +145,9 @@ const to: Chrome = {
   pronunciation: "Pronunciation", // TODO verify
   playPronunciation: "Play pronunciation", // TODO verify
   letters: "Letters", // TODO verify
+  aboutCredit:
+    "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.", // TODO verify
+  keyHint: "/ search · ↑↓ move · Enter open · Esc clear", // TODO verify
 };
 
 const chrome: Record<UiLang, Chrome> = { en, to };
