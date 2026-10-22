@@ -1,14 +1,21 @@
 import { APP_NAME, APP_SUBTITLE } from "../brand";
+import { strings } from "../i18n";
+import type { Direction } from "../preferences";
 
-export default function About() {
+type Props = {
+  direction: Direction;
+};
+
+export default function About({ direction }: Props) {
+  const copy = strings(direction);
   return (
     <article className="page-pane">
       <div className="page-wrap">
         <h1 id="page-title" tabIndex={-1} className="page-title">
-          About
+          {copy.about}
         </h1>
         <p>
-          Built from the spreadsheet <cite>{APP_NAME} {APP_SUBTITLE}</cite>.
+          {copy.aboutBuilt} <cite>{APP_NAME} {APP_SUBTITLE}</cite>.
         </p>
         <ul className="credits">
           <li>

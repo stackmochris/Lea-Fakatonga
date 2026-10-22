@@ -9,6 +9,7 @@ export type ScrubLetter = {
 type Props = {
   letters: ScrubLetter[];
   wide: boolean;
+  label: string;
   onScrubbing: (active: boolean) => void;
 };
 
@@ -21,7 +22,7 @@ function nearestEnabled(letters: ScrubLetter[], index: number): ScrubLetter | nu
   return null;
 }
 
-export default function AlphaIndex({ letters, wide, onScrubbing }: Props) {
+export default function AlphaIndex({ letters, wide, label, onScrubbing }: Props) {
   const navRef = useRef<HTMLElement>(null);
   const dragging = useRef(false);
   const lastLabel = useRef("");
@@ -138,7 +139,7 @@ export default function AlphaIndex({ letters, wide, onScrubbing }: Props) {
         ref={navRef}
         className="alpha"
         role="navigation"
-        aria-label="Letters"
+        aria-label={label}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}

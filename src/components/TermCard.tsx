@@ -1,3 +1,4 @@
+import { strings } from "../i18n";
 import type { Direction } from "../preferences";
 import type { TermEntry } from "../types";
 import Highlight from "./Highlight";
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export default function TermCard({ entry, selected, query, direction, onSelect, rise, delay }: Props) {
+  const copy = strings(direction);
   const draft = entry.to_term.trim() === "";
   const tonganFirst = direction === "to-en";
   const primaryText = tonganFirst ? entry.to_term.trim() || entry.en_term : entry.en_term;
@@ -42,7 +44,7 @@ export default function TermCard({ entry, selected, query, direction, onSelect, 
           <span className="term-primary" lang={primaryLang} translate={primaryLang === "to" ? "no" : undefined}>
             <Highlight text={primaryText} query={query} />
           </span>
-          {draft && <span className="draft-label">Draft</span>}
+          {draft && <span className="draft-label">{copy.draft}</span>}
         </span>
         {secondaryText && (
           <span className="term-secondary" lang={tonganFirst ? "en" : "to"} translate={tonganFirst ? undefined : "no"}>

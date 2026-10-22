@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent, type RefObject } from "react";
 import { APP_NAME, APP_SUBTITLE, APP_VERSION } from "../brand";
+import { strings } from "../i18n";
 import type { Direction } from "../preferences";
 import type { Page } from "../route";
 import type { ProfessionPack } from "../types";
@@ -154,6 +155,7 @@ export default function Drawer({
     else setOffset(0);
   }
 
+  const copy = strings(direction);
   const style =
     offset !== 0 || dragging
       ? { transform: `translateX(${offset}px)`, transition: dragging ? "none" : undefined }
@@ -164,7 +166,7 @@ export default function Drawer({
       <button
         type="button"
         className={shown ? "scrim is-in" : "scrim"}
-        aria-label="Close menu"
+        aria-label={copy.closeMenu}
         onClick={onClose}
       />
       <div
@@ -173,7 +175,7 @@ export default function Drawer({
         className={shown ? "drawer is-in" : "drawer"}
         role="dialog"
         aria-modal="true"
-        aria-label="Menu"
+        aria-label={copy.menu}
         tabIndex={-1}
         style={style}
         onKeyDown={onKeyDown}
@@ -192,8 +194,8 @@ export default function Drawer({
           <button type="button" className="drawer-link" aria-current={page === "home" ? "page" : undefined} onClick={onHome}>
             <HomeIcon />
             <span className="drawer-label">
-              Home
-              <span className="drawer-hint">Dictionary</span>
+              {copy.home}
+              <span className="drawer-hint">{copy.dictionary}</span>
             </span>
           </button>
           <button
@@ -203,7 +205,7 @@ export default function Drawer({
             onClick={() => setSubjectsOpen((value) => !value)}
           >
             <SubjectsIcon />
-            <span className="drawer-label">Subjects</span>
+            <span className="drawer-label">{copy.subjects}</span>
             <ChevronDown className={subjectsOpen ? "icon twist is-open" : "icon twist"} />
           </button>
           {subjectsOpen && (
@@ -228,16 +230,16 @@ export default function Drawer({
             </div>
           )}
           <div className="drawer-direction">
-            <p className="drawer-kicker">Direction</p>
-            <DirectionSeg direction={direction} onChange={onDirection} />
+            <p className="drawer-kicker">{copy.direction}</p>
+            <DirectionSeg direction={direction} onChange={onDirection} label={copy.direction} />
           </div>
           <button type="button" className="drawer-link" aria-current={page === "settings" ? "page" : undefined} onClick={onSettings}>
             <SettingsIcon />
-            <span className="drawer-label">Settings</span>
+            <span className="drawer-label">{copy.settings}</span>
           </button>
           <button type="button" className="drawer-link" aria-current={page === "about" ? "page" : undefined} onClick={onAbout}>
             <AboutIcon />
-            <span className="drawer-label">About</span>
+            <span className="drawer-label">{copy.about}</span>
           </button>
         </div>
         <p className="drawer-foot">

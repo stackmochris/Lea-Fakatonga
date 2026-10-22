@@ -9,6 +9,9 @@
   --hero-ink: #ffffff;
   --hero-meta: #f1c4c4;
   --hero-line: #a8353a;
+  --hero-glow: #d15a4c;
+  --hero-bloom: #b23e38;
+  --hero-wine: #4c101c;
   --accent: #c8102e;
   --accent-text: #a50d26;
   --amber: #9a5a14;
@@ -40,6 +43,9 @@
   --soft: #1d1d1e;
   --hero: #5e1216;
   --hero-line: #7a2328;
+  --hero-glow: #c45a4e;
+  --hero-bloom: #8a3834;
+  --hero-wine: #2a0810;
   --accent-text: #ff8a8a;
   --amber: #d9953f;
   --amber-fill: #d9953f;
@@ -57,6 +63,9 @@
     --soft: #1d1d1e;
     --hero: #5e1216;
     --hero-line: #7a2328;
+    --hero-glow: #c45a4e;
+    --hero-bloom: #8a3834;
+    --hero-wine: #2a0810;
     --accent-text: #ff8a8a;
     --amber: #d9953f;
     --amber-fill: #d9953f;
@@ -601,12 +610,42 @@ mark {
   padding: 20px;
   border-radius: var(--r-hero);
   color: var(--hero-ink);
-  background: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--hero) 92%, white) 0%, var(--hero) 58%);
+  /* Static spectrum: a warm glow tucked into the top-right, wine at the bottom left, over the hero red. */
+  background:
+    radial-gradient(120% 140% at 100% 0%, var(--hero-glow) 0%, transparent 30%),
+    radial-gradient(72% 84% at 100% 0%, var(--hero-bloom) 0%, transparent 34%),
+    radial-gradient(120% 140% at 0% 100%, var(--hero-wine) 0%, transparent 62%),
+    var(--hero);
   overflow: hidden;
+}
+
+.hero-manulua {
+  position: absolute;
+  z-index: 0;
+  top: -24px;
+  right: -92px;
+  width: 268px;
+  height: 268px;
+  color: #fff;
+  opacity: 0.42;
+  filter: blur(3px);
+  pointer-events: none;
+  user-select: none;
+  /* Fade before the headword so the corner stays bright and the type stays clear. */
+  -webkit-mask-image: linear-gradient(225deg, #000 0 30%, transparent 56%);
+  mask-image: linear-gradient(225deg, #000 0 30%, transparent 56%);
+}
+
+.hero-block,
+.hero-rule,
+.nifo-strip {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-copy {
   position: absolute;
+  z-index: 1;
   top: 8px;
   right: 8px;
   color: var(--hero-ink);

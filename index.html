@@ -31,6 +31,9 @@
         if (localStorage.getItem("lea-text-size") === "large") {
           document.documentElement.setAttribute("data-text-size", "large");
         }
+        if (localStorage.getItem("lea-direction") === "to-en") {
+          document.documentElement.lang = "to";
+        }
       } catch (error) {}
     </script>
   </head>

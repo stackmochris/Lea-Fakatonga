@@ -11,6 +11,7 @@ import Sheet from "./components/Sheet";
 import TermCard from "./components/TermCard";
 import TermDetail from "./components/TermDetail";
 import { professions } from "./data/professions";
+import { strings, uiLang } from "./i18n";
 import {
   applyDirection,
   applyTextSize,
@@ -160,6 +161,7 @@ export default function App() {
 
   useEffect(() => {
     applyDirection(direction);
+    document.documentElement.lang = uiLang(direction);
   }, [direction]);
 
   useEffect(() => {
@@ -182,12 +184,13 @@ export default function App() {
   }, [direction]);
 
   useEffect(() => {
+    const copy = strings(direction);
     if (page === "about") {
-      document.title = `About · ${APP_NAME}`;
+      document.title = `${copy.about} · ${APP_NAME}`;
       return;
     }
     if (page === "settings") {
-      document.title = `Settings · ${APP_NAME}`;
+      document.title = `${copy.settings} · ${APP_NAME}`;
       return;
     }
     if (!profession) return;
@@ -419,11 +422,11 @@ export default function App() {
     window.setTimeout(() => document.getElementById(`tab-${pack.slug}`)?.focus(), 0);
   }
 
-  if (!profession) {
-    return <p className="empty">No glossary packs are loaded.</p>;
-  }
+  const copy = strings(direction);
 
-  const noun = filtered.length === 1 ? "word" : "words";
+  if (!profession) {
+    return <p className="empty">{copy.noPacks}</p>;
+  }
   const appClass = ["app", hideHeader ? "is-header-hidden" : "", covered && !wide ? "is-sheet" : ""].filter(Boolean).join(" ");
   let running = 0;
 
@@ -431,14 +434,14 @@ export default function App() {
     <div className={appClass}>
       <div ref={frameRef} className="app-frame">
         <a className="skip" href="#main">
-          Skip to content
+          {copy.skip}
         </a>
         <header className="topbar">
           <button
             ref={menuRef}
             type="button"
             className="menu-button"
-            aria-label="Menu"
+            aria-label={copy.menu}
             aria-haspopup="dialog"
             aria-expanded={drawerOpen}
             aria-controls="app-drawer"
@@ -448,14 +451,14 @@ export default function App() {
           </button>
           <p className="brand-title">{APP_NAME}</p>
           {page === "home" ? (
-            <button type="button" className="icon-btn" aria-label="Search" onClick={() => document.getElementById("term-search")?.focus()}>
+            <button type="button" className="icon-btn" aria-label={copy.search} onClick={() => document.getElementById("term-search")?.focus()}>
               <SearchIcon />
             </button>
           ) : (
             <span />
           )}
         </header>
-        {page === "about" && <About />}
+        {page === "about" && <About direction={direction} />}
         {page === "settings" && (
           <Settings
             direction={direction}
@@ -474,13 +477,13 @@ export default function App() {
                 <div className={searching ? "toolbar is-searching" : "toolbar"}>
                   <form className="search" role="search" onSubmit={(event) => event.preventDefault()}>
                     <label className="sr-only" htmlFor="term-search">
-                      Search words
+                      {copy.searchWords}
                     </label>
                     <SearchIcon />
                     <input
                       id="term-search"
                       type="search"
-                      placeholder="Search"
+                      placeholder={copy.search}
                       value={query}
                       autoComplete="off"
                       autoCapitalize="off"
@@ -495,7 +498,7 @@ export default function App() {
                       onChange={(event) => setQuery(event.target.value)}
                     />
                     {query && !searching && (
-                      <button type="button" className="search-clear" aria-label="Clear search" onClick={() => setQuery("")}>
+                      <button type="button" className="search-clear" aria-label={copy.clearSearch} onClick={() => setQuery("")}>
                         <CloseIcon />
                       </button>
                     )}
@@ -512,18 +515,18 @@ export default function App() {
                         (document.getElementById("term-search") as HTMLInputElement | null)?.blur();
                       }}
                     >
-                      Cancel
+                      {copy.cancel}
                     </button>
                   ) : (
-                    <DirectionSeg direction={direction} onChange={setDirection} />
+                    <DirectionSeg direction={direction} onChange={setDirection} label={copy.direction} />
                   )}
                 </div>
                 <p className="result-count" aria-live="polite">
                   <span key={`${filtered.length}-${needle}`} className="count-fade">
-                    {filtered.length} {noun}
+                    {copy.wordCount(filtered.length)}
                   </span>
                 </p>
-                <div className="chips" role="tablist" aria-label="Subjects" onKeyDown={onTabKeyDown}>
+                <div className="chips" role="tablist" aria-label={copy.subjects} onKeyDown={onTabKeyDown}>
                   {professions.map((pack) => {
                     const active = pack.slug === profession.slug;
                     return (
@@ -545,8 +548,8 @@ export default function App() {
                 </div>
                 {filtered.length === 0 ? (
                   <div className="empty card">
-                    <h2>No matching words</h2>
-                    <p>{needle ? `Nothing matches “${deferredQuery.trim()}”.` : "Nothing to show."}</p>
+                    <h2>{copy.noMatching}</h2>
+                    <p>{needle ? copy.nothingMatches(deferredQuery.trim()) : copy.nothingToShow}</p>
                     <button
                       type="button"
                       className="ghost"
@@ -555,7 +558,7 @@ export default function App() {
                         setSearching(false);
                       }}
                     >
-                      Clear search
+                      {copy.clearSearch}
                     </button>
                   </div>
                 ) : (
@@ -592,15 +595,15 @@ export default function App() {
                   </div>
                 )}
               </div>
-              <AlphaIndex letters={grouped.letters} wide={wide} onScrubbing={setScrubbing} />
+              <AlphaIndex letters={grouped.letters} wide={wide} label={copy.letters} onScrubbing={setScrubbing} />
             </div>
             {wide && (
-              <div className="detail-pane" aria-label="Term detail">
+              <div className="detail-pane" aria-label={copy.termDetail}>
                 {selected ? (
                   <TermDetail entry={selected} direction={direction} layout="inline" onCopy={() => copyEntry(selected)} />
                 ) : (
                   <div className="empty-detail">
-                    <p>Choose a word</p>
+                    <p>{copy.chooseWord}</p>
                   </div>
                 )}
               </div>
@@ -612,6 +615,7 @@ export default function App() {
         <Sheet
           open={sheetOpen}
           subject={profession.name_en}
+          copyLabel={copy.copyTerm}
           onClose={closeDetail}
           onCopy={() => copyEntry(sheetEntry)}
           onCover={onCover}
@@ -636,7 +640,7 @@ export default function App() {
       />
       {toast && (
         <div className="toast" role="status">
-          Copied
+          {copy.copied}
         </div>
       )}
     </div>
