@@ -1,4 +1,4 @@
-/** Pinwheel manulua. Brand mark only — header and favicon, never tiled. */
+/** Pinwheel manulua. Menu button and favicon only — never tiled. */
 export function ManuluaMark() {
   return (
     <svg className="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
