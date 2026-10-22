@@ -32,7 +32,7 @@ export type Chrome = {
   light: string;
   dark: string;
   system: string;
-  aboutBuilt: string;
+  aboutSupport: string;
   noMatching: string;
   nothingToShow: string;
   nothingMatches: (query: string) => string;
@@ -78,7 +78,7 @@ const en: Chrome = {
   light: "Light",
   dark: "Dark",
   system: "System",
-  aboutBuilt: "Built from the spreadsheet",
+  aboutSupport: "Built with the support and contributions of the Tongan Language Society:",
   noMatching: "No matching words",
   nothingToShow: "Nothing to show.",
   nothingMatches: (query) => `Nothing matches “${query}”.`,
@@ -125,7 +125,7 @@ const to: Chrome = {
   light: "Light", // TODO verify
   dark: "Dark", // TODO verify
   system: "System", // TODO verify
-  aboutBuilt: "Built from the spreadsheet", // TODO verify
+  aboutSupport: "Built with the support and contributions of the Tongan Language Society:", // TODO verify
   noMatching: "No matching words", // TODO verify
   nothingToShow: "Nothing to show.", // TODO verify
   nothingMatches: (query) => `Nothing matches “${query}”.`, // TODO verify
