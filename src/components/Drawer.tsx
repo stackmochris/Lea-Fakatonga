@@ -192,9 +192,6 @@ export default function Drawer({
       >
         <div className="drawer-brand">
           <p className="drawer-name">{APP_NAME}</p>
-          <p className="drawer-sub" lang="to" translate="no">
-            {APP_SUBTITLE}
-          </p>
         </div>
         <div className="drawer-scroll">
           <button type="button" className="drawer-link" aria-current={page === "home" ? "page" : undefined} onClick={onHome}>

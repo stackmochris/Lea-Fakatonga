@@ -26,6 +26,7 @@ export type Chrome = {
   settings: string;
   about: string;
   aboutCredit: string;
+  aboutSupport: string;
   textSize: string;
   normal: string;
   large: string;
@@ -33,7 +34,6 @@ export type Chrome = {
   light: string;
   dark: string;
   system: string;
-  aboutBuilt: string;
   noMatching: string;
   nothingToShow: string;
   nothingMatches: (query: string) => string;
@@ -71,6 +71,7 @@ const en: Chrome = {
   settings: "Settings",
   about: "About",
   aboutCredit: "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.",
+  aboutSupport: "Built with the support and contributions of the Tongan Language Society:",
   textSize: "Text size",
   normal: "Normal",
   large: "Large",
@@ -78,7 +79,6 @@ const en: Chrome = {
   light: "Light",
   dark: "Dark",
   system: "System",
-  aboutBuilt: "Built from the spreadsheet",
   noMatching: "No matching words",
   nothingToShow: "Nothing to show.",
   nothingMatches: (query) => `Nothing matches “${query}”.`,
@@ -116,6 +116,7 @@ const to: Chrome = {
   settings: "Ngaahi Fokotuʻutuʻu", // Pending a native-speaker check.
   about: "Fekauʻaki mo e Polokalama", // Pending a native-speaker check.
   aboutCredit: "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.", // TODO verify
+  aboutSupport: "Built with the support and contributions of the Tongan Language Society:", // TODO verify
   textSize: "Text size", // TODO verify
   normal: "Normal", // TODO verify
   large: "Large", // TODO verify
@@ -123,7 +124,6 @@ const to: Chrome = {
   light: "Light", // TODO verify
   dark: "Dark", // TODO verify
   system: "System", // TODO verify
-  aboutBuilt: "Built from the spreadsheet", // TODO verify
   noMatching: "No matching words", // TODO verify
   nothingToShow: "Nothing to show.", // TODO verify
   nothingMatches: (query) => `Nothing matches “${query}”.`, // TODO verify

@@ -872,8 +872,6 @@ mark {
   line-height: 1.15;
 }
 
-.drawer-sub { margin: 4px 0 0; color: var(--meta); font-size: 16px; }
-
 .drawer-scroll {
   flex: 1;
   min-height: 0;
