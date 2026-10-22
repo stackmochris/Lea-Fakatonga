@@ -4,6 +4,7 @@ import { ChevronLeft, CopyIcon } from "./Icons";
 type Props = {
   open: boolean;
   subject: string;
+  copyLabel: string;
   onClose: () => void;
   onCopy: () => void;
   onCover: (covered: boolean) => void;
@@ -15,7 +16,7 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export default function Sheet({ open, subject, onClose, onCopy, onCover, onExited, children }: Props) {
+export default function Sheet({ open, subject, copyLabel, onClose, onCopy, onCover, onExited, children }: Props) {
   const [shown, setShown] = useState(false);
   const [dragX, setDragX] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -124,7 +125,7 @@ export default function Sheet({ open, subject, onClose, onCopy, onCover, onExite
           <ChevronLeft />
           <span>{subject}</span>
         </button>
-        <button type="button" className="icon-btn" aria-label="Copy term" onClick={onCopy}>
+        <button type="button" className="icon-btn" aria-label={copyLabel} onClick={onCopy}>
           <CopyIcon />
         </button>
       </div>

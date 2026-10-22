@@ -3,10 +3,10 @@ import type { Direction } from "../preferences";
 type Props = {
   direction: Direction;
   onChange: (direction: Direction) => void;
-  label?: string;
+  label: string;
 };
 
-export default function DirectionSeg({ direction, onChange, label = "Direction" }: Props) {
+export default function DirectionSeg({ direction, onChange, label }: Props) {
   const tonganFirst = direction === "to-en";
   return (
     <div className="seg" role="group" aria-label={label}>
