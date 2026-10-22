@@ -6,7 +6,6 @@ import AlphaIndex from "./components/AlphaIndex";
 import DirectionSeg from "./components/DirectionSeg";
 import Drawer from "./components/Drawer";
 import { CloseIcon, HamburgerIcon, SearchIcon } from "./components/Icons";
-import Settings from "./components/Settings";
 import Sheet from "./components/Sheet";
 import TermCard from "./components/TermCard";
 import TermDetail from "./components/TermDetail";
@@ -187,10 +186,6 @@ export default function App() {
     const copy = strings(direction);
     if (page === "about") {
       document.title = `${copy.about} · ${APP_NAME}`;
-      return;
-    }
-    if (page === "settings") {
-      document.title = `${copy.settings} · ${APP_NAME}`;
       return;
     }
     if (!profession) return;
@@ -459,16 +454,6 @@ export default function App() {
           )}
         </header>
         {page === "about" && <About direction={direction} />}
-        {page === "settings" && (
-          <Settings
-            direction={direction}
-            textSize={textSize}
-            theme={themePref}
-            onDirection={setDirection}
-            onTextSize={setTextSize}
-            onTheme={setThemePref}
-          />
-        )}
         {page === "home" && (
           <div className="stage">
             <div className="list-shell">
@@ -629,14 +614,17 @@ export default function App() {
         page={page}
         slug={profession.slug}
         direction={direction}
+        textSize={textSize}
+        theme={themePref}
         professions={professions}
         returnFocus={menuRef}
         onClose={() => setDrawerOpen(false)}
         onHome={goHome}
         onAbout={() => setPage("about")}
-        onSettings={() => setPage("settings")}
         onSubject={selectProfession}
         onDirection={setDirection}
+        onTextSize={setTextSize}
+        onTheme={setThemePref}
       />
       {toast && (
         <div className="toast" role="status">

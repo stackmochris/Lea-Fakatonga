@@ -1,25 +1,28 @@
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent, type RefObject } from "react";
 import { APP_NAME, APP_SUBTITLE, APP_VERSION } from "../brand";
 import { strings } from "../i18n";
-import type { Direction } from "../preferences";
+import type { Direction, TextSize, ThemePreference } from "../preferences";
 import type { Page } from "../route";
 import type { ProfessionPack } from "../types";
-import DirectionSeg from "./DirectionSeg";
-import { AboutIcon, ChevronDown, HomeIcon, SettingsIcon, SubjectsIcon } from "./Icons";
+import DirectionSeg, { Segmented } from "./DirectionSeg";
+import { AboutIcon, ChevronDown, HomeIcon, SubjectsIcon } from "./Icons";
 
 type Props = {
   open: boolean;
   page: Page;
   slug: string;
   direction: Direction;
+  textSize: TextSize;
+  theme: ThemePreference;
   professions: ProfessionPack[];
   returnFocus: RefObject<HTMLButtonElement | null>;
   onClose: () => void;
   onHome: () => void;
   onAbout: () => void;
-  onSettings: () => void;
   onSubject: (slug: string) => void;
   onDirection: (direction: Direction) => void;
+  onTextSize: (size: TextSize) => void;
+  onTheme: (theme: ThemePreference) => void;
 };
 
 function reducedMotion() {
@@ -31,14 +34,17 @@ export default function Drawer({
   page,
   slug,
   direction,
+  textSize,
+  theme,
   professions,
   returnFocus,
   onClose,
   onHome,
   onAbout,
-  onSettings,
   onSubject,
   onDirection,
+  onTextSize,
+  onTheme,
 }: Props) {
   const [mounted, setMounted] = useState(false);
   const [shown, setShown] = useState(false);
@@ -229,26 +235,53 @@ export default function Drawer({
               ))}
             </div>
           )}
-          <div className="drawer-direction">
-            <p className="drawer-kicker">{copy.direction}</p>
-            <DirectionSeg direction={direction} onChange={onDirection} label={copy.direction} />
-          </div>
-          <button type="button" className="drawer-link" aria-current={page === "settings" ? "page" : undefined} onClick={onSettings}>
-            <SettingsIcon />
-            <span className="drawer-label">{copy.settings}</span>
-          </button>
           <button type="button" className="drawer-link" aria-current={page === "about" ? "page" : undefined} onClick={onAbout}>
             <AboutIcon />
             <span className="drawer-label">{copy.about}</span>
           </button>
+          <div className="drawer-controls">
+            <h2 className="drawer-section">{copy.settings}</h2>
+            <div className="drawer-control">
+              <p className="drawer-kicker">{copy.direction}</p>
+              <p className="drawer-help">{copy.directionHelp}</p>
+              <DirectionSeg direction={direction} onChange={onDirection} label={copy.direction} />
+            </div>
+            <div className="drawer-control">
+              <p className="drawer-kicker">{copy.textSize}</p>
+              <Segmented
+                label={copy.textSize}
+                value={textSize}
+                onChange={onTextSize}
+                options={[
+                  { value: "normal", label: copy.normal },
+                  { value: "large", label: copy.large },
+                ]}
+              />
+            </div>
+            <div className="drawer-control">
+              <p className="drawer-kicker">{copy.theme}</p>
+              <Segmented
+                label={copy.theme}
+                value={theme}
+                onChange={onTheme}
+                options={[
+                  { value: "light", label: copy.light },
+                  { value: "dark", label: copy.dark },
+                  { value: "system", label: copy.system },
+                ]}
+              />
+            </div>
+          </div>
         </div>
-        <p className="drawer-foot">
-          <span className="num">v{APP_VERSION}</span>
-          <span>{APP_NAME}</span>
-          <span lang="to" translate="no">
-            {APP_SUBTITLE}
-          </span>
-        </p>
+        <div className="drawer-foot">
+          <p className="version-card spectrum">
+            <span className="num">v{APP_VERSION}</span>
+            <span>{APP_NAME}</span>
+            <span lang="to" translate="no">
+              {APP_SUBTITLE}
+            </span>
+          </p>
+        </div>
       </div>
     </>
   );
