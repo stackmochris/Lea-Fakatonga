@@ -41,7 +41,7 @@ export default function TermDetail({ entry, onBack, onSelectCategory }: Props) {
         </p>
         {(missingTerm || missingDef) && <p className="draft-flag">Draft — not yet reviewed</p>}
         {entry.prefix && <p className="prefix">Prefix: {entry.prefix}</p>}
-        <div className="detail-rule" aria-hidden="true" />
+        <div className="nifo-band nifo-band-short" aria-hidden="true" />
         <div className="def-grid">
           <section>
             <h3>English</h3>

@@ -1,1 +1,1 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/types.ts","./src/components/TermCard.tsx","./src/data/professions/index.ts"],"version":"5.9.3"}
+{"root":["./src/App.tsx","./src/main.tsx","./src/search.ts","./src/theme.ts","./src/types.ts","./src/components/Gap.tsx","./src/components/Highlight.tsx","./src/components/Icons.tsx","./src/components/Motifs.tsx","./src/components/TermCard.tsx","./src/components/TermDetail.tsx","./src/data/professions/index.ts"],"version":"5.9.3"}
