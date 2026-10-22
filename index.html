@@ -13,13 +13,20 @@
     <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
     <script>
       try {
-        var theme = localStorage.getItem("lea-theme");
-        if (theme === "dark" || theme === "light") {
-          document.documentElement.setAttribute("data-theme", theme);
-          if (theme === "dark") {
-            var meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute("content", "#100E0C");
-          }
+        var themePref = localStorage.getItem("lea-theme");
+        var resolved = themePref === "dark" || themePref === "light"
+          ? themePref
+          : themePref === "system"
+            ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+            : "light";
+        document.documentElement.setAttribute("data-theme", resolved);
+        document.documentElement.style.colorScheme = resolved;
+        if (resolved === "dark") {
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", "#100E0C");
+        }
+        if (localStorage.getItem("lea-text-size") === "large") {
+          document.documentElement.setAttribute("data-text-size", "large");
         }
       } catch (error) {}
     </script>
