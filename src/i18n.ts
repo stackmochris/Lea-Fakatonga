@@ -25,6 +25,7 @@ export type Chrome = {
   directionHelp: string;
   settings: string;
   about: string;
+  aboutCredit: string;
   textSize: string;
   normal: string;
   large: string;
@@ -69,6 +70,7 @@ const en: Chrome = {
   directionHelp: "The headword is shown first in the list and in search.",
   settings: "Settings",
   about: "About",
+  aboutCredit: "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.",
   textSize: "Text size",
   normal: "Normal",
   large: "Large",
@@ -106,13 +108,14 @@ const to: Chrome = {
   searchWords: "Search words", // TODO verify
   clearSearch: "Clear search", // TODO verify
   cancel: "Cancel", // TODO verify
-  subjects: "Subjects", // TODO verify
+  subjects: "Ngaahi Kaveinga", // Pending a native-speaker check. Short label: Kaveinga.
   home: "ʻApi",
   dictionary: "Dictionary", // TODO verify
   direction: "Direction", // TODO verify
   directionHelp: "The headword is shown first in the list and in search.", // TODO verify
-  settings: "Settings", // TODO verify
-  about: "About", // TODO verify
+  settings: "Ngaahi Fokotuʻutuʻu", // Pending a native-speaker check.
+  about: "Fekauʻaki mo e Polokalama", // Pending a native-speaker check.
+  aboutCredit: "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.", // TODO verify
   textSize: "Text size", // TODO verify
   normal: "Normal", // TODO verify
   large: "Large", // TODO verify

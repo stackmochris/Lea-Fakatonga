@@ -58,21 +58,6 @@ export function SubjectsIcon({ className = "icon" }: IconProps) {
   );
 }
 
-export function SettingsIcon({ className = "icon" }: IconProps) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
-      <path
-        d="M12 3.5 V6 M12 18 V20.5 M3.5 12 H6 M18 12 H20.5 M5.8 5.8 L7.6 7.6 M16.4 16.4 L18.2 18.2 M18.2 5.8 L16.4 7.6 M7.6 16.4 L5.8 18.2"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 export function AboutIcon({ className = "icon" }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 24 24" aria-hidden="true">

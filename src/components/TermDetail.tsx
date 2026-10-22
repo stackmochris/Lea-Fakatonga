@@ -62,7 +62,7 @@ export default function TermDetail({ entry, direction, layout, onCopy }: Props) 
 
   return (
     <article className="detail" aria-labelledby={titleId}>
-      <section className="hero">
+      <section className="hero spectrum">
         <ManuluaMark className="hero-manulua" decorative />
         {layout === "inline" && (
           <button type="button" className="icon-btn hero-copy" aria-label={copy.copyTerm} onClick={onCopy}>

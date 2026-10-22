@@ -17,6 +17,7 @@ export default function About({ direction }: Props) {
         <p>
           {copy.aboutBuilt} <cite>{APP_NAME} {APP_SUBTITLE}</cite>.
         </p>
+        <p>{copy.aboutCredit}</p>
         <ul className="credits">
           <li>
             <span lang="to" translate="no">
