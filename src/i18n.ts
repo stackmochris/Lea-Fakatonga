@@ -52,7 +52,7 @@ export type Chrome = {
   pronunciation: string;
   playPronunciation: string;
   letters: string;
-  desktopCredit: string;
+  aboutCredit: string;
   keyHint: string;
 };
 
@@ -98,7 +98,8 @@ const en: Chrome = {
   pronunciation: "Pronunciation",
   playPronunciation: "Play pronunciation",
   letters: "Letters",
-  desktopCredit: "Desktop web edition by Crisem Consulting.",
+  aboutCredit:
+    "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.",
   keyHint: "/ search · ↑↓ move · Enter open · Esc clear",
 };
 
@@ -144,7 +145,8 @@ const to: Chrome = {
   pronunciation: "Pronunciation", // TODO verify
   playPronunciation: "Play pronunciation", // TODO verify
   letters: "Letters", // TODO verify
-  desktopCredit: "Desktop web edition by Crisem Consulting.", // TODO verify
+  aboutCredit:
+    "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.", // TODO verify
   keyHint: "/ search · ↑↓ move · Enter open · Esc clear", // TODO verify
 };
 
