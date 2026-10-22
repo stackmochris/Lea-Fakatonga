@@ -111,13 +111,13 @@ const to: Chrome = {
   searchWords: "Search words", // TODO verify
   clearSearch: "Clear search", // TODO verify
   cancel: "Cancel", // TODO verify
-  subjects: "Ngaahi Kaveinga",
+  subjects: "Ngaahi Kaveinga", // Pending a native-speaker check. Short label: Kaveinga.
   home: "ʻApi",
   dictionary: "Dictionary", // TODO verify
   direction: "Direction", // TODO verify
   directionHelp: "The headword is shown first in the list and in search.", // TODO verify
-  settings: "Settings", // TODO verify
-  about: "About", // TODO verify
+  settings: "Ngaahi Fokotuʻutuʻu", // Pending a native-speaker check.
+  about: "Fekauʻaki mo e Polokalama", // Pending a native-speaker check.
   textSize: "Text size", // TODO verify
   normal: "Normal", // TODO verify
   large: "Large", // TODO verify
