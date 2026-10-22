@@ -1,7 +1,7 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import TermCard from "./components/TermCard";
 import TermDetail from "./components/TermDetail";
-import { BrandMark, TapaMedallion } from "./components/Tapa";
+import { FoiHea, ManuluaMark } from "./components/Motifs";
 import { CloseIcon, MoonIcon, SearchIcon, SunIcon } from "./components/Icons";
 import { professions } from "./data/professions";
 import { fold } from "./search";
@@ -186,11 +186,11 @@ export default function App() {
       <a className="skip" href="#glossary-results">
         Skip to terms
       </a>
-      <div className="tapa-band" aria-hidden="true" />
+      <div className="nifo-band" aria-hidden="true" />
       <header className="topbar">
         <div className="brand-row">
           <div className="brand">
-            <BrandMark />
+            <ManuluaMark />
             <div>
               <h1 className="brand-name">Lea Fakatonga</h1>
               <p className="brand-tag">Specialist terminology dictionary</p>
@@ -255,7 +255,10 @@ export default function App() {
               >
                 <span className="tab-en">
                   {pack.name_en}
-                  <span className="tab-count">{pack.entries.length}</span>
+                  <span className="tab-count">
+                    {active ? <FoiHea className="foi-badge" /> : null}
+                    {pack.entries.length}
+                  </span>
                 </span>
                 <span className="tab-to" lang="to" translate="no">
                   {pack.name_to}
@@ -288,7 +291,7 @@ export default function App() {
           ))}
         </div>
       </header>
-      <div className="tapa-rule" aria-hidden="true" />
+      <div className="nifo-band" aria-hidden="true" />
       <main className="workspace">
         <section
           ref={listRef}
@@ -307,7 +310,7 @@ export default function App() {
           </div>
           {filtered.length === 0 ? (
             <div className="empty">
-              <TapaMedallion />
+              <FoiHea className="foi-ornament" />
               <h2>No matching terms</h2>
               <p>
                 {trimmed
@@ -348,7 +351,7 @@ export default function App() {
             />
           ) : (
             <div className="overview">
-              <TapaMedallion />
+              <FoiHea className="foi-ornament" />
               <p className="kicker">Subject</p>
               <h2>{profession.name_en}</h2>
               <p className="overview-to" lang="to" translate="no">
@@ -360,17 +363,24 @@ export default function App() {
               <dl className="stats">
                 <div>
                   <dd>{profession.entries.length}</dd>
-                  <dt>Terms</dt>
+                  <dt>
+                    <FoiHea className="foi-bullet" />
+                    Terms
+                  </dt>
                 </div>
                 <div>
                   <dd>{categories.length}</dd>
-                  <dt>Categories</dt>
+                  <dt>
+                    <FoiHea className="foi-bullet" />
+                    Categories
+                  </dt>
                 </div>
               </dl>
             </div>
           )}
         </section>
       </main>
+      <div className="nifo-band" aria-hidden="true" />
     </div>
   );
 }
