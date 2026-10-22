@@ -225,16 +225,6 @@ h1, h2, h3, p { margin: 0; }
   white-space: nowrap;
 }
 
-.brand-sub {
-  display: none;
-  margin-top: 2px;
-  color: var(--hero-meta);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
 .search-slot { grid-area: search; min-width: 0; display: flex; justify-content: center; }
 
 .search {
@@ -1092,7 +1082,6 @@ mark {
 
   .brand-mark { width: 34px; height: 34px; }
   .brand-title { font-size: 22px; }
-  .brand-sub { display: block; }
 
   .search-slot { min-width: 180px; }
   .search input { height: 52px; border-radius: 16px; }

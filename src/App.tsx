@@ -1,6 +1,6 @@
 import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { letterId, letterOf, scrubberLetters } from "./alpha";
-import { APP_NAME, APP_SUBTITLE } from "./brand";
+import { APP_NAME } from "./brand";
 import About from "./components/About";
 import AlphaIndex from "./components/AlphaIndex";
 import DirectionSeg from "./components/DirectionSeg";
@@ -480,9 +480,6 @@ export default function App() {
           <ManuluaMark className="brand-mark" decorative />
           <span className="brand-text">
             <span className="brand-title">{APP_NAME}</span>
-            <span className="brand-sub" lang="to" translate="no">
-              {APP_SUBTITLE}
-            </span>
           </span>
         </button>
         <div className="search-slot">
