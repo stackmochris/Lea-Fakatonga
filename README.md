@@ -8,8 +8,11 @@ full brief.
 
 ## Status
 
-Scaffold only. No content populated yet — see `src/data/professions/_template.json`
-for the schema every profession pack must follow.
+Three profession packs ship in `src/data/professions/`: Agriculture (`agriculture.json`),
+Computer Terms (`computer-terms.json`), and Sustainable Development Goals (`sdg.json`).
+They are imported by `src/data/professions/index.ts` and rendered as subject tabs.
+The JSON copy is the glossary; the interface does not rewrite it. `_template.json`
+is the schema for a new pack and is not registered.
 
 ## Stack
 
@@ -20,10 +23,13 @@ for the schema every profession pack must follow.
 
 ## Getting started
 
+The dev and preview servers use the GitHub Pages base path.
+
 ```bash
 npm install
-npm run dev       # local dev server
+npm run dev        # http://localhost:5173/Lea-Fakatonga/
 npm run build      # static production build → dist/
+npm run preview    # http://localhost:4173/Lea-Fakatonga/
 ```
 
 ## Adding a new profession
@@ -53,7 +59,7 @@ Every term entry has this shape (see `src/types.ts` for the enforced version):
 
 ## Not yet built
 
-- Audio playback UI (field exists in schema, player component not built)
+- Recorded pronunciation audio (the player renders when `audio_url` is set; none are yet)
 - Offline storage / service worker
 - Language toggle for UI chrome (content-level EN/TO toggle works)
 - Native app wrapper

@@ -3,7 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tongan Specialist Terminology Dictionary</title>
+    <meta name="theme-color" content="#C10000" />
+    <meta
+      name="description"
+      content="Lea Fakatonga is an English–Tongan specialist glossary for agriculture, computing, and sustainable development."
+    />
+    <title>Lea Fakatonga · Specialist terminology dictionary</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C10000'/%3E%3Cpath d='M16 6.5 L25.5 16 L16 25.5 L6.5 16 Z' fill='none' stroke='%23fff' stroke-width='1.6'/%3E%3Cpath d='M16 11.5 L20.5 16 L16 20.5 L11.5 16 Z' fill='%23fff'/%3E%3C/svg%3E"
+    />
+    <script>
+      try {
+        var theme = localStorage.getItem("lea-theme");
+        if (theme === "dark" || theme === "light") {
+          document.documentElement.setAttribute("data-theme", theme);
+          if (theme === "dark") {
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute("content", "#100E0C");
+          }
+        }
+      } catch (error) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
