@@ -1,1 +1,21 @@
-PLACEHOLDER
+{
+  "slug": "sdg",
+  "name_en": "Sustainable Development Goals",
+  "name_to": "Taumu'a Fakalakalaka Tu'uloa",
+  "_note": "Synced from the spreadsheet Kolosālio Lea mo hono ʻUhinga (Taumu'a Fakalakalaka Tu'uloa tab) on 2026-10-23. Covers Goals 1–17. Tongan terms and definitions taken verbatim from the sheet.",
+  "entries": [
+    {
+      "id": "income-gap",
+      "en_term": "Income gap",
+      "to_term": "Faikehekehe he vāhengá",
+      "en_definition": "Disparity between high and low earners.",
+      "to_definition": "Faikehekehe 'i he vahe mā'olungá mo e ma'ulaló",
+      "category": "SDG 1: No Poverty",
+      "en_example": "",
+      "to_example": "",
+      "prefix": "",
+      "audio_url": "",
+      "image_url": ""
+    }
+  ]
+}
