@@ -6,6 +6,12 @@ dictionary app). One codebase, one data schema, swappable content packs per
 profession — see `/docs/project-scope.pdf` (add the proposal PDF here) for the
 full brief.
 
+## Find the source for a task
+
+- **One profession or term.** Start with its shipped pack in [professions](src/data/professions), using the [pack registry](src/data/professions/index.ts) for keys and order.
+- **Sheet comparison or import.** Open [import script](scripts/import-sheet.py) and [glossary check](scripts/check-glossary.mjs). The [sheet fixture](scripts/fixtures/sheet_terms.json) is an input to the check. The checked-in SDG pack and sheet fixture currently disagree. Verify the source rows and confirm which revision should govern before changing shipped terms.
+- **UI or release.** Start at [App.tsx](src/App.tsx) for behaviour or [Pages workflow](.github/workflows/deploy.yml) and [Vite configuration](vite.config.ts) for deployment. Check this repository's files when documenting its release behaviour.
+
 ## Status
 
 Profession packs live in `src/data/professions/*.json` and are registered in
