@@ -706,6 +706,63 @@ mark {
 
 .empty p { margin: 0 0 16px; color: var(--meta); }
 
+.referral-stage { min-width: 0; }
+
+.referral-card {
+  max-width: 32rem;
+  margin: 4px 16px 32px;
+  padding: 22px 22px 18px;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--r);
+}
+
+.referral-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.referral-subtitle {
+  margin: 6px 0 0;
+  color: var(--meta);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.referral-note {
+  margin: 14px 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.referral-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.referral-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: var(--btn-r);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.referral-link:active { transform: none; }
+
 .alpha {
   position: fixed;
   top: var(--topbar-h);
@@ -1127,6 +1184,25 @@ mark {
 
   .stage.is-page { display: block; overflow: auto; }
 
+  .stage.is-referral { grid-template-columns: minmax(0, 1fr); }
+
+  .referral-stage {
+    min-height: 0;
+    overflow: auto;
+    padding: 8px 32px 64px;
+  }
+
+  .referral-stage .list-meta,
+  .referral-card {
+    width: min(40rem, 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .referral-stage .list-meta { padding-left: 0; padding-right: 0; }
+
+  .referral-card { margin-top: 8px; margin-bottom: 48px; }
+
   .mobile-subjects { display: none; }
 
   .list-shell {
@@ -1226,6 +1302,7 @@ mark {
   .term-row.is-selected:hover { background: color-mix(in srgb, var(--accent) 9%, var(--surface)); }
   .alpha button:not(:disabled):hover { color: var(--ink); }
   .header-links button:hover { background: color-mix(in srgb, #fff 14%, transparent); }
+  .referral-link:hover { background: var(--soft); }
 }
 
 @media (prefers-reduced-motion: reduce) {

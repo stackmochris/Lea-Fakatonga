@@ -7,6 +7,16 @@
     {
       "tab": "Body Parts Tongan order",
       "reason": "The same 539 rows as Body Parts English order, sorted by Tongan. Imported once into body-parts.json."
+    },
+    {
+      "tab": "Medical ",
+      "reason": "Medical terms were removed. The subject links to Tala ʻUhinga Fakafaitoʻo. Rows for this tab must not be put back into the fixture or medical.json."
+    }
+  ],
+  "emptyPacks": [
+    {
+      "file": "medical.json",
+      "reason": "Replaced by a link to Tala ʻUhinga Fakafaitoʻo. Do not import the Medical sheet tab."
     }
   ],
   "skippedRows": [
@@ -81,7 +91,6 @@
     "Fisiki": "physics.json",
     "Teolosia": "theology.json",
     "Body Parts English order": "body-parts.json",
-    "Medical ": "medical.json",
     "Ngaue'anga (HR)": "human-resources.json",
     "ʻEkonōmika": "economics.json"
   },

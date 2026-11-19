@@ -4,6 +4,9 @@
 Sheet text is copied verbatim aside from stripping leading and trailing
 whitespace. Okina and macrons are not normalised. Existing packs are not
 rebuilt; only the real Tongan-term mismatches in the audit diff are patched.
+
+Medical is not a word list. medical.json links to Tala ʻUhinga Fakafaitoʻo
+and must not be regenerated from the sheet.
 """
 
 from __future__ import annotations
@@ -16,7 +19,8 @@ FIXTURE = ROOT / "scripts" / "fixtures" / "sheet_terms.json"
 DIFF = ROOT / "scripts" / "fixtures" / "diff.json"
 DATA = ROOT / "src" / "data" / "professions"
 
-# Sheet tab -> pack. Body Parts Tongan order and TNU are intentionally absent.
+# Sheet tab -> pack. Body Parts Tongan order, TNU, and Medical are intentionally absent.
+# Medical links out to Tala ʻUhinga Fakafaitoʻo. Do not add it back here.
 PACKS = [
     ("ʻĀtolopolosia", "anthropology", "Anthropology", "ʻĀtolopolosia", "anthropology.json"),
     ("TLS", "tls", "TLS", "TLS", "tls.json"),
@@ -25,7 +29,6 @@ PACKS = [
     ("Fisiki", "physics", "Physics", "Fisiki", "physics.json"),
     ("Teolosia", "theology", "Theology", "Teolosia", "theology.json"),
     ("Body Parts English order", "body-parts", "Body Parts", "Body Parts", "body-parts.json"),
-    ("Medical ", "medical", "Medical", "Medical", "medical.json"),
     ("Ngaue'anga (HR)", "human-resources", "Human Resources", "Ngaue'anga (HR)", "human-resources.json"),
     ("ʻEkonōmika", "economics", "Economics", "ʻEkonōmika", "economics.json"),
 ]
@@ -90,8 +93,14 @@ def entry_from(row: dict, used_ids: set[str]) -> dict:
 
 
 def write_pack(filename: str, slug: str, name_en: str, name_to: str, entries: list[dict]) -> None:
-    pack = {"slug": slug, "name_en": name_en, "name_to": name_to, "entries": entries}
     path = DATA / filename
+    if path.exists():
+        current = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(current, dict) and current.get("referral"):
+            raise SystemExit(
+                f"refusing to overwrite {filename}: it links to another dictionary and its term list must stay empty"
+            )
+    pack = {"slug": slug, "name_en": name_en, "name_to": name_to, "entries": entries}
     path.write_text(json.dumps(pack, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {filename}: {len(entries)} terms")
 

@@ -17,8 +17,10 @@ full brief.
 Profession packs live in `src/data/professions/*.json` and are registered in
 `src/data/professions/index.ts`. `npm run check:glossary` counts them and checks
 each row of `scripts/fixtures/sheet_terms.json` is represented, aside from the
-skips in `scripts/sheet-coverage.json`. `_template.json` is the schema for a new
-pack and is not registered.
+skips in `scripts/sheet-coverage.json`. The Medical subject stays in the list
+with no terms: it links to Tala ʻUhinga Fakafaitoʻo, and the Medical sheet tab
+is left out of the fixture so import cannot put that word list back.
+`_template.json` is the schema for a new pack and is not registered.
 
 ## Stack
 

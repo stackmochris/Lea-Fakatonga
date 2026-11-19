@@ -54,6 +54,7 @@ export type Chrome = {
   letters: string;
   aboutCredit: string;
   keyHint: string;
+  newTab: string;
 };
 
 const en: Chrome = {
@@ -101,6 +102,7 @@ const en: Chrome = {
   aboutCredit:
     "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.",
   keyHint: "/ search · ↑↓ move · Enter open · Esc clear",
+  newTab: "opens in a new tab",
 };
 
 const to: Chrome = {
@@ -148,6 +150,7 @@ const to: Chrome = {
   aboutCredit:
     "This demo app was produced by Crisem Consulting under the direction of Dr Litia Vea Simpson.", // TODO verify
   keyHint: "/ search · ↑↓ move · Enter open · Esc clear", // TODO verify
+  newTab: "opens in a new tab", // TODO verify
 };
 
 const chrome: Record<UiLang, Chrome> = { en, to };
