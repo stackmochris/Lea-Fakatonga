@@ -6,6 +6,7 @@ import AlphaIndex from "./components/AlphaIndex";
 import DirectionSeg from "./components/DirectionSeg";
 import { ChevronLeft, CloseIcon, MoonIcon, SearchIcon, SunIcon } from "./components/Icons";
 import { ManuluaMark } from "./components/Motifs";
+import ReferralCard from "./components/ReferralCard";
 import Settings from "./components/Settings";
 import Sidebar from "./components/Sidebar";
 import TermCard from "./components/TermCard";
@@ -542,7 +543,7 @@ export default function App() {
           onAbout={() => setPage("about")}
           onSettings={() => setPage("settings")}
         />
-        <div className={page === "home" ? "stage" : "stage is-page"} id="main">
+        <div className={page === "home" ? (profession.referral ? "stage is-referral" : "stage") : "stage is-page"} id="main">
           {page === "about" && <About direction={direction} />}
           {page === "settings" && (
             <Settings
@@ -571,11 +572,20 @@ export default function App() {
                       onClick={() => selectProfession(pack.slug)}
                     >
                       {pack.name_en}
-                      <span className="chip-count">{pack.entries.length}</span>
+                      {pack.referral ? null : <span className="chip-count">{pack.entries.length}</span>}
                     </button>
                   );
                 })}
               </div>
+              {profession.referral ? (
+                <div className="referral-stage">
+                  <div className="list-meta">
+                    <TitleTag className="list-title">{profession.name_en}</TitleTag>
+                  </div>
+                  <ReferralCard referral={profession.referral} direction={direction} />
+                </div>
+              ) : (
+              <>
               <div className="list-shell">
                 <div ref={listScrollRef} className="list-scroll">
                   <div className="list-meta">
@@ -655,6 +665,8 @@ export default function App() {
                   </div>
                 )}
               </div>
+              </>
+              )}
             </>
           )}
         </div>

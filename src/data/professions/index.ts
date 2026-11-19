@@ -17,6 +17,8 @@ import tls from "./tls.json";
 // Copy _template.json to get started with a new one.
 // Order follows the source glossary sheet. TNU is an empty tab and is omitted.
 // Body parts is imported once; the sheet's Tongan-order tab is the same list.
+// Medical stays in this list with no entries. Its screen links to
+// Tala ʻUhinga Fakafaitoʻo instead of showing a word list.
 export const professions: ProfessionPack[] = [
   anthropology as ProfessionPack,
   tls as ProfessionPack,

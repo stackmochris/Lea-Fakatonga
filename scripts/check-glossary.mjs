@@ -6,6 +6,9 @@
  * The three original packs keep their okina style, capitalisation, and
  * definitions. They are matched loosely, and the audited Tongan-term
  * mismatches must match the sheet exactly.
+ *
+ * Medical is an empty referral pack. Its rows must stay out of the fixture
+ * so a later import cannot put the word list back.
  */
 
 import { readFileSync, readdirSync } from "node:fs";
@@ -52,6 +55,39 @@ for (const pack of packs.values()) {
   console.log(`  ${String(pack.entries.length).padStart(4)}  ${pack.name_en} / ${pack.name_to}  (${pack.slug})`);
 }
 console.log(`  ${String(total).padStart(4)}  total`);
+
+const MEDICAL_TITLE = "Tala \u02BBUhinga Fakafaito\u02BBo";
+const MEDICAL_LINKS = [
+  "https://apps.apple.com/us/app/tala-uhinga-fakafaitoo/id6754945362",
+  "https://play.google.com/store/apps/details?id=com.kiwadigital.tonganmedicaldictionary",
+];
+
+for (const item of coverage.emptyPacks ?? []) {
+  const pack = packs.get(item.file);
+  if (!pack) {
+    fail(`missing empty pack ${item.file}`);
+    continue;
+  }
+  if (pack.entries.length !== 0) {
+    fail(`${item.file} has ${pack.entries.length} entries; ${item.reason}`);
+  }
+  const referral = pack.referral;
+  if (!referral || referral.title !== MEDICAL_TITLE) {
+    fail(`${item.file} referral title must be ${MEDICAL_TITLE}`);
+  }
+  const hrefs = new Set((referral?.links ?? []).map((link) => link.href));
+  for (const href of MEDICAL_LINKS) {
+    if (!hrefs.has(href)) fail(`${item.file} is missing referral link ${href}`);
+  }
+}
+
+const medicalRows = sheet.terms.filter((row) => String(row.tab).trim() === "Medical");
+if (medicalRows.length) {
+  fail(`sheet fixture has ${medicalRows.length} Medical rows; delete them so import cannot recreate the word list`);
+}
+if (Object.keys(sheet.layout ?? {}).some((tab) => String(tab).trim() === "Medical")) {
+  fail("sheet fixture layout still includes the Medical tab");
+}
 
 const skippedTabs = new Set(coverage.skippedTabs.map((item) => item.tab));
 const skippedRows = new Set(coverage.skippedRows.map((item) => `${item.tab}\t${item.row}`));

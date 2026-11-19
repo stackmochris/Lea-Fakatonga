@@ -63,7 +63,7 @@ export default function Sidebar({ professions, slug, page, direction, onSubject,
                   </span>
                 )}
               </span>
-              <span className="subject-count">{pack.entries.length}</span>
+              {pack.referral ? null : <span className="subject-count">{pack.entries.length}</span>}
             </button>
           );
         })}
